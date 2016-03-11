@@ -1,0 +1,9 @@
+c:\users\paolo\documents\visual studio 2013\Projects\INTROOS_Project\INTROOS_Project\bin\Debug\INTROOS_Project.exe.config
+c:\users\paolo\documents\visual studio 2013\Projects\INTROOS_Project\INTROOS_Project\bin\Debug\INTROOS_Project.exe
+c:\users\paolo\documents\visual studio 2013\Projects\INTROOS_Project\INTROOS_Project\bin\Debug\INTROOS_Project.pdb
+c:\users\paolo\documents\visual studio 2013\Projects\INTROOS_Project\INTROOS_Project\obj\Debug\INTROOS_Project.csprojResolveAssemblyReference.cache
+c:\users\paolo\documents\visual studio 2013\Projects\INTROOS_Project\INTROOS_Project\obj\Debug\INTROOS_Project.main.resources
+c:\users\paolo\documents\visual studio 2013\Projects\INTROOS_Project\INTROOS_Project\obj\Debug\INTROOS_Project.Properties.Resources.resources
+c:\users\paolo\documents\visual studio 2013\Projects\INTROOS_Project\INTROOS_Project\obj\Debug\INTROOS_Project.csproj.GenerateResource.Cache
+c:\users\paolo\documents\visual studio 2013\Projects\INTROOS_Project\INTROOS_Project\obj\Debug\INTROOS_Project.exe
+c:\users\paolo\documents\visual studio 2013\Projects\INTROOS_Project\INTROOS_Project\obj\Debug\INTROOS_Project.pdb
