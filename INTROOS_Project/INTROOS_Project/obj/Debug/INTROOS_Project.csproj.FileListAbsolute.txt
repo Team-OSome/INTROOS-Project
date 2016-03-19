@@ -7,3 +7,12 @@ c:\users\paolo\documents\visual studio 2013\Projects\INTROOS_Project\INTROOS_Pro
 c:\users\paolo\documents\visual studio 2013\Projects\INTROOS_Project\INTROOS_Project\obj\Debug\INTROOS_Project.csproj.GenerateResource.Cache
 c:\users\paolo\documents\visual studio 2013\Projects\INTROOS_Project\INTROOS_Project\obj\Debug\INTROOS_Project.exe
 c:\users\paolo\documents\visual studio 2013\Projects\INTROOS_Project\INTROOS_Project\obj\Debug\INTROOS_Project.pdb
+C:\Users\Nolan\Documents\GitHub\INTROOS-Project\INTROOS_Project\INTROOS_Project\bin\Debug\INTROOS_Project.exe.config
+C:\Users\Nolan\Documents\GitHub\INTROOS-Project\INTROOS_Project\INTROOS_Project\obj\Debug\INTROOS_Project.exe
+C:\Users\Nolan\Documents\GitHub\INTROOS-Project\INTROOS_Project\INTROOS_Project\obj\Debug\INTROOS_Project.pdb
+C:\Users\Nolan\Documents\GitHub\INTROOS-Project\INTROOS_Project\INTROOS_Project\bin\Debug\INTROOS_Project.exe
+C:\Users\Nolan\Documents\GitHub\INTROOS-Project\INTROOS_Project\INTROOS_Project\bin\Debug\INTROOS_Project.pdb
+C:\Users\Nolan\Documents\GitHub\INTROOS-Project\INTROOS_Project\INTROOS_Project\obj\Debug\INTROOS_Project.csprojResolveAssemblyReference.cache
+C:\Users\Nolan\Documents\GitHub\INTROOS-Project\INTROOS_Project\INTROOS_Project\obj\Debug\INTROOS_Project.main.resources
+C:\Users\Nolan\Documents\GitHub\INTROOS-Project\INTROOS_Project\INTROOS_Project\obj\Debug\INTROOS_Project.Properties.Resources.resources
+C:\Users\Nolan\Documents\GitHub\INTROOS-Project\INTROOS_Project\INTROOS_Project\obj\Debug\INTROOS_Project.csproj.GenerateResource.Cache
