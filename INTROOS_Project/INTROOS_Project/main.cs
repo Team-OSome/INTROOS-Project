@@ -8,12 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Threading;
 
 namespace INTROOS_Project
 {
     public partial class main : Form
     {
+        private PerformanceCounter pcProcess;
+
         public main()
         {
             InitializeComponent();
@@ -23,16 +24,7 @@ namespace INTROOS_Project
         private void main_Load(object sender, EventArgs e)
         {
             loadProcessList();
-        }
-
-        private void startBtn_Click(object sender, EventArgs e)
-        {
-            Process process = new Process();
-            process.StartInfo.FileName = processTxt.Text;
-            process.Start();
-                     
-            loadProcessList();
-        }   
+        }  
 
         private void refreshTimer_Tick(object sender, EventArgs e)
         {
@@ -44,7 +36,23 @@ namespace INTROOS_Project
 
             processListGridView.CurrentCell = processListGridView.Rows[currentCell].Cells[0];
             processListGridView.FirstDisplayedScrollingRowIndex = currentRow;
-            processListGridView.FirstDisplayedScrollingColumnIndex = currentColumn;          
+            processListGridView.FirstDisplayedScrollingColumnIndex = currentColumn;
+
+            if (pcProcess != null)
+            {
+                cpuUsageLbl.Text = "CPU usage: " + pcProcess.NextValue() + "%";
+            }
+        }
+        #endregion 
+
+        #region Button Click Events
+        private void startBtn_Click(object sender, EventArgs e)
+        {
+            Process process = new Process();
+            process.StartInfo.FileName = processTxt.Text;
+            process.Start();
+
+            loadProcessList();
         }
 
         private void stopBtn_Click(object sender, EventArgs e)
@@ -62,6 +70,18 @@ namespace INTROOS_Project
             }
 
             loadProcessList();
+        }
+
+        private void viewUsageBtn_Click(object sender, EventArgs e)
+        {
+            if (processListGridView.CurrentCell != null)
+            {
+                pcProcess = new PerformanceCounter("Process", "% Processor Time", processListGridView.Rows[processListGridView.CurrentCell.RowIndex].Cells[0].Value.ToString());
+            }
+            else
+            {
+                MessageBox.Show("Please select a process", "Error");
+            }
         }
         #endregion
 
@@ -133,6 +153,8 @@ namespace INTROOS_Project
             return "0 Bytes";
         }
         #endregion
+
+        
 
     }
 }
