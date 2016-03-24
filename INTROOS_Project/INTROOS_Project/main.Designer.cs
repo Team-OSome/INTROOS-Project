@@ -28,28 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.startBtn = new System.Windows.Forms.Button();
             this.stopBtn = new System.Windows.Forms.Button();
             this.processTxt = new System.Windows.Forms.TextBox();
-            this.processListView = new System.Windows.Forms.ListView();
-            this.columnName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.processListGridView = new System.Windows.Forms.DataGridView();
+            this.refreshTimer = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cpuUsageLabel = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.processListGridView)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // startBtn
             // 
-            this.startBtn.Location = new System.Drawing.Point(12, 12);
+            this.startBtn.Location = new System.Drawing.Point(12, 56);
             this.startBtn.Name = "startBtn";
-            this.startBtn.Size = new System.Drawing.Size(153, 23);
+            this.startBtn.Size = new System.Drawing.Size(132, 23);
             this.startBtn.TabIndex = 0;
-            this.startBtn.Text = "Start";
+            this.startBtn.Text = "Start Process";
             this.startBtn.UseVisualStyleBackColor = true;
             this.startBtn.Click += new System.EventHandler(this.startBtn_Click);
             // 
             // stopBtn
             // 
-            this.stopBtn.Location = new System.Drawing.Point(13, 123);
+            this.stopBtn.Location = new System.Drawing.Point(12, 120);
             this.stopBtn.Name = "stopBtn";
-            this.stopBtn.Size = new System.Drawing.Size(152, 23);
+            this.stopBtn.Size = new System.Drawing.Size(132, 23);
             this.stopBtn.TabIndex = 1;
             this.stopBtn.Text = "Stop";
             this.stopBtn.UseVisualStyleBackColor = true;
@@ -57,35 +64,77 @@
             // 
             // processTxt
             // 
-            this.processTxt.Location = new System.Drawing.Point(13, 42);
+            this.processTxt.Location = new System.Drawing.Point(12, 30);
             this.processTxt.Name = "processTxt";
-            this.processTxt.Size = new System.Drawing.Size(152, 20);
+            this.processTxt.Size = new System.Drawing.Size(132, 20);
             this.processTxt.TabIndex = 2;
             // 
-            // processListView
+            // processListGridView
             // 
-            this.processListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.processListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnName});
-            this.processListView.Location = new System.Drawing.Point(192, 12);
-            this.processListView.Name = "processListView";
-            this.processListView.Size = new System.Drawing.Size(431, 353);
-            this.processListView.TabIndex = 4;
-            this.processListView.UseCompatibleStateImageBehavior = false;
+            this.processListGridView.AllowUserToAddRows = false;
+            this.processListGridView.AllowUserToDeleteRows = false;
+            this.processListGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.processListGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.processListGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.processListGridView.Location = new System.Drawing.Point(171, 12);
+            this.processListGridView.Name = "processListGridView";
+            this.processListGridView.ReadOnly = true;
+            this.processListGridView.RowHeadersVisible = false;
+            this.processListGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.processListGridView.Size = new System.Drawing.Size(452, 375);
+            this.processListGridView.TabIndex = 3;
             // 
-            // columnName
+            // refreshTimer
             // 
-            this.columnName.Text = "Name";
-            this.columnName.Width = 250;
+            this.refreshTimer.Enabled = true;
+            this.refreshTimer.Interval = 10000;
+            this.refreshTimer.Tick += new System.EventHandler(this.refreshTimer_Tick);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(76, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Process Name";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 104);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(121, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Select a process to stop";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.cpuUsageLabel);
+            this.groupBox1.Location = new System.Drawing.Point(12, 164);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(132, 223);
+            this.groupBox1.TabIndex = 7;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = " Performance ";
+            // 
+            // cpuUsageLabel
+            // 
+            this.cpuUsageLabel.AutoSize = true;
+            this.cpuUsageLabel.Location = new System.Drawing.Point(6, 27);
+            this.cpuUsageLabel.Name = "cpuUsageLabel";
+            this.cpuUsageLabel.Size = new System.Drawing.Size(0, 13);
+            this.cpuUsageLabel.TabIndex = 0;
             // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(635, 377);
-            this.Controls.Add(this.processListView);
+            this.ClientSize = new System.Drawing.Size(635, 399);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.processListGridView);
             this.Controls.Add(this.processTxt);
             this.Controls.Add(this.stopBtn);
             this.Controls.Add(this.startBtn);
@@ -93,6 +142,9 @@
             this.Name = "main";
             this.Text = "Process Manager";
             this.Load += new System.EventHandler(this.main_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.processListGridView)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -103,8 +155,12 @@
         private System.Windows.Forms.Button startBtn;
         private System.Windows.Forms.Button stopBtn;
         private System.Windows.Forms.TextBox processTxt;
-        private System.Windows.Forms.ColumnHeader columnName;
-        private System.Windows.Forms.ListView processListView;
+        private System.Windows.Forms.DataGridView processListGridView;
+        private System.Windows.Forms.Timer refreshTimer;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label cpuUsageLabel;
     }
 }
 
