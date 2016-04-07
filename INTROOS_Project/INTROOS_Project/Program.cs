@@ -16,7 +16,8 @@ namespace INTROOS_Project
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new main());
+            //Application.Run(new main());
+            Application.Run(new ProcessManagerForm());
         }
     }
 }

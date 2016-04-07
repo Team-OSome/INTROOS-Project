@@ -5,43 +5,45 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Management;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace INTROOS_Project
 {
-    public partial class main : Form
+    public partial class ProcessManagerForm : Form
     {
         private PerformanceCounter pcProcess;
         private PerformanceCounter cpuCounter;
         private PerformanceCounter ramCounter;
-        private float[] values;
-        private float[] RAMValues;
 
-        public main()
+        private string processorName;
+        private string processorDescription;
+        private string processorArchitecture;
+        private string processorNumberOfCores;
+        private string processorMaxClockSpeed;
+
+        private float[] CPUUsageValues;
+
+        public ProcessManagerForm()
         {
             this.cpuCounter = new PerformanceCounter();
-            ramCounter = new PerformanceCounter("Memory", "Available MBytes"); 
-            values = new float[11];
-            RAMValues = new float[11];
-            for (int i = 0; i < 11; i++)
-            {
-                values[i] = 0;
-            }
-            for (int i = 0; i < 11; i++)
-            {
-                RAMValues[i] = 0;
-            }
+            this.cpuCounter.CategoryName = "Processor";
+            this.cpuCounter.CounterName = "% Processor Time";
+            this.cpuCounter.InstanceName = "_Total";
+            this.ramCounter = new PerformanceCounter("Memory", "Available MBytes"); 
             InitializeComponent();
-            
         }
 
         #region Event Handlers
-        private void main_Load(object sender, EventArgs e)
+
+        private void ProcessManagerForm_Load(object sender, EventArgs e)
         {
+            loadProcessorInformation();
+            initializeCPUChart();
             loadProcessList();
-        }  
+        }
 
         private void refreshTimer_Tick(object sender, EventArgs e)
         {
@@ -59,9 +61,12 @@ namespace INTROOS_Project
             {
                 cpuUsageLbl.Text = "CPU usage: " + pcProcess.NextValue() + "%";
             }
-            updateChart();
+
+            updateCPUChart();
         }
-        #endregion 
+
+
+        #endregion
 
         #region Button Click Events
         private void startBtn_Click(object sender, EventArgs e)
@@ -105,7 +110,7 @@ namespace INTROOS_Project
 
         private void loadProcessList()
         {
-            
+
             Process[] processList = Process.GetProcesses();
             DataTable dt = new DataTable();
             DataRow row;
@@ -122,7 +127,7 @@ namespace INTROOS_Project
                     #region Process Name and ID
                     row["Process Name"] = process.ProcessName;
                     row["Process ID"] = process.Id;
-                    #endregion                
+                    #endregion
 
                     #region Disk Usage
                     row["Disk Usage"] = formatBytes(Convert.ToInt32(process.PagedMemorySize64));
@@ -135,14 +140,15 @@ namespace INTROOS_Project
                     #endregion
 
                     dt.Rows.Add(row);
-                }                                          
+                }
             }
             processListGridView.DataSource = dt;
-            processListGridView.Sort(processListGridView.Columns["Process Name"], ListSortDirection.Ascending);        
+            processListGridView.Sort(processListGridView.Columns["Process Name"], ListSortDirection.Ascending);
             processListGridView.Refresh();
         }
 
         #region Utility Functions
+
         private void initializeDataTable(DataTable table)
         {
             table.Columns.Add("Process Name");
@@ -164,85 +170,105 @@ namespace INTROOS_Project
                 if (Bytes > max)
                 {
                     return string.Format("{0:##.##} {1}", decimal.Divide(Bytes, max), order);
-                }                  
+                }
                 max /= scale;
             }
 
             return "0 Bytes";
         }
-        #endregion
 
-        #region line graph functions
-
-        private void setValues()
+        private void loadProcessorInformation()
         {
-            float[] temp = new float[11];
-            float cpuUsage;
-            float ramUsage;
-
-            cpuUsage = this.getCurrentCpuUsage();
-            TotalCPUUsageLbl.Text = "Total CPU Usage: " + cpuUsage.ToString() + "%";
-            temp[0] = cpuUsage;
-            temp[1] = values[0];
-            temp[2] = values[1];
-            temp[3] = values[2];
-            temp[4] = values[3];
-            temp[5] = values[4];
-            temp[6] = values[5];
-            temp[7] = values[6];
-            temp[8] = values[7];
-            temp[9] = values[8];
-            temp[10] = values[9];
-            for (int i = 0; i < 11; i++)
+            this.processorName = this.GetComponent("Win32_Processor", "Name");
+            this.processorDescription = this.GetComponent("Win32_Processor", "Description");
+            this.processorArchitecture = this.GetComponent("Win32_Processor", "Architecture");
+            switch (this.processorArchitecture)
             {
-                this.values[i] = temp[i];
+                case "0": this.processorArchitecture = "x86"; break;
+                case "1": this.processorArchitecture = "MIPS"; break;
+                case "2": this.processorArchitecture = "Alpha"; break;
+                case "3": this.processorArchitecture = "PowerPC"; break;
+                case "5": this.processorArchitecture = "ARM"; break;
+                case "6": this.processorArchitecture = "ia64"; break;
+                case "9": this.processorArchitecture = "x64"; break;
+                default: break;
             }
+            this.processorNumberOfCores = this.GetComponent("Win32_Processor", "NumberOfCores");
+            this.processorMaxClockSpeed = this.GetComponent("Win32_Processor", "MaxClockSpeed");
+            this.processorMaxClockSpeed = (Convert.ToInt32(this.processorMaxClockSpeed) / 1000.0).ToString() + "GHz";
+
+            procNameLbl.Text = this.processorName;
+            procDescriptionLbl.Text = this.processorDescription;
+            procArchitectureLbl.Text = this.processorArchitecture;
+            procNumOfCoresLbl.Text = this.processorNumberOfCores;
+            procMaxClockSpeedLbl.Text = this.processorMaxClockSpeed;
         }
 
-        private void updateChart()
+        private string GetComponent(string hwclass, string syntax)
         {
-            int j = 0;
-            foreach (var series in chartGraphic.Series)
+            string str = "";
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM " + hwclass);
+            foreach (ManagementObject mj in mos.Get())
+            {
+                //Console.WriteLine(Convert.ToString(mj[syntax]));
+                str = Convert.ToString(mj[syntax]);
+            }
+            return str;
+        }
+
+        #endregion
+
+        #region Chart Functions
+
+        private void initializeCPUChart()
+        {
+            this.CPUUsageValues = new float[50];
+            for (int i = 0; i < 50; i++)
+            {
+                this.CPUUsageValues[i] = 0;
+            }
+            CPUChart.ChartAreas[0].AxisX.Minimum = 0;
+            CPUChart.ChartAreas[0].AxisX.Maximum = 50;
+            CPUChart.ChartAreas[0].AxisY.Minimum = 0;
+            CPUChart.ChartAreas[0].AxisY.Maximum = 100;
+            CPUChart.ChartAreas[0].AxisY.ScaleView.Zoom(0, 100); // -15<= y <=15
+            CPUChart.ChartAreas[0].AxisX.ScaleView.Zoom(1, 50); // -15 <= x <= 2
+            CPUChart.ChartAreas[0].CursorX.IsUserEnabled = true;
+            CPUChart.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
+            CPUChart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+            CPUChart.ChartAreas[0].AxisX.LabelStyle.Enabled = false;
+            CPUChart.Series[0].IsVisibleInLegend = false;
+        }
+
+        private void updateCPUChart()
+        {
+            float[] temp = new float[50];
+
+            foreach (var series in CPUChart.Series)
             {
                 series.Points.Clear();
             }
-            chartGraphic.ChartAreas[0].AxisY.Minimum = 0;
-            chartGraphic.ChartAreas[0].AxisY.Maximum = 100;
-            chartGraphic.ChartAreas[0].AxisY.ScaleView.Zoom(0, 100); // -15<= y <=15
-            chartGraphic.ChartAreas[0].AxisX.ScaleView.Zoom(1, 10); // -15 <= x <= 2
-            chartGraphic.ChartAreas[0].CursorX.IsUserEnabled = true; 
-            chartGraphic.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
-            chartGraphic.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
-            chartGraphic.ChartAreas[0].AxisX.LabelStyle.Enabled = false;
-            chartGraphic.Series[0].IsVisibleInLegend = false;
-            this.setValues();
-            for (int i = 0; i < 11; i++)
+
+            temp[49] = this.cpuCounter.NextValue();
+            if (temp[49].ToString("n2").Length < 5) procCPUUsageLbl.Text = temp[49].ToString("n3") +"%";
+            else procCPUUsageLbl.Text = temp[49].ToString("n2") + "%";
+            for (int i = 0; i < 49; i++)
+			{
+                temp[i] = this.CPUUsageValues[i + 1];
+			}
+
+            for (int i = 0; i < 50; i++)
             {
-                chartGraphic.Series[0].Points.AddXY(i, this.values[i]);
-                chartGraphic.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-                j++;
+                this.CPUUsageValues[i] = temp[i];
             }
-            Console.WriteLine("Total RAM: " + new Microsoft.VisualBasic.Devices.ComputerInfo().TotalPhysicalMemory);
-            Console.WriteLine("Available RAM: " + this.getAvailableRAM());
 
+            for (int i = 0; i < 50; i++)
+            {
+                CPUChart.Series[0].Points.AddXY(i, this.CPUUsageValues[i]);
+                CPUChart.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            }
         }
-
-
-        public float getCurrentCpuUsage()
-        {
-            cpuCounter.CategoryName = "Processor";
-            cpuCounter.CounterName = "% Processor Time";
-            cpuCounter.InstanceName = "_Total";
-
-            return this.cpuCounter.NextValue();
-        }
-
-        public float getAvailableRAM()
-        {
-            return ramCounter.NextValue();
-        } 
 
         #endregion
-
     }
 }
