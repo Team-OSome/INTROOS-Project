@@ -25,6 +25,7 @@ namespace INTROOS_Project
         private string processorMaxClockSpeed;
 
         private float[] CPUUsageValues;
+        private float[] singleCPUUsageValues;
 
         public ProcessManagerForm()
         {
@@ -42,6 +43,7 @@ namespace INTROOS_Project
         {
             loadProcessorInformation();
             initializeCPUChart();
+            initializeSingleProcessCPUChart();
             loadProcessList();
         }
 
@@ -57,12 +59,8 @@ namespace INTROOS_Project
             processListGridView.FirstDisplayedScrollingRowIndex = currentRow;
             processListGridView.FirstDisplayedScrollingColumnIndex = currentColumn;
 
-            if (pcProcess != null)
-            {
-                cpuUsageLbl.Text = "CPU usage: " + pcProcess.NextValue() + "%";
-            }
-
             updateCPUChart();
+            updateSingleProcessCPUChart();
         }
 
 
@@ -266,6 +264,58 @@ namespace INTROOS_Project
             {
                 CPUChart.Series[0].Points.AddXY(i, this.CPUUsageValues[i]);
                 CPUChart.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            }
+        }
+
+        private void initializeSingleProcessCPUChart()
+        {
+            this.singleCPUUsageValues = new float[50];
+            for (int i = 0; i < 50; i++)
+            {
+                this.singleCPUUsageValues[i] = 0;
+            }
+            singleProcessCPUChart.ChartAreas[0].AxisX.Minimum = 0;
+            singleProcessCPUChart.ChartAreas[0].AxisX.Maximum = 50;
+            singleProcessCPUChart.ChartAreas[0].AxisY.Minimum = 0;
+            singleProcessCPUChart.ChartAreas[0].AxisY.Maximum = 100;
+            singleProcessCPUChart.ChartAreas[0].AxisY.ScaleView.Zoom(0, 100); // -15<= y <=15
+            singleProcessCPUChart.ChartAreas[0].AxisX.ScaleView.Zoom(1, 50); // -15 <= x <= 2
+            singleProcessCPUChart.ChartAreas[0].CursorX.IsUserEnabled = true;
+            singleProcessCPUChart.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
+            singleProcessCPUChart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+            singleProcessCPUChart.ChartAreas[0].AxisX.LabelStyle.Enabled = false;
+            singleProcessCPUChart.Series[0].IsVisibleInLegend = false;
+        }
+
+        private void updateSingleProcessCPUChart()
+        {
+            float[] temp = new float[50];
+
+            foreach (var series in singleProcessCPUChart.Series)
+            {
+                series.Points.Clear();
+            }
+            if (pcProcess != null)
+            {
+                temp[49] = this.pcProcess.NextValue();
+                if (temp[49].ToString("n2").Length < 5) cpuUsageLbl.Text = temp[49].ToString("n3") + "%";
+                else cpuUsageLbl.Text = temp[49].ToString("n2") + "%";
+            }
+            else temp[49] = 0;
+            for (int i = 0; i < 49; i++)
+            {
+                temp[i] = this.singleCPUUsageValues[i + 1];
+            }
+
+            for (int i = 0; i < 50; i++)
+            {
+                this.singleCPUUsageValues[i] = temp[i];
+            }
+
+            for (int i = 0; i < 50; i++)
+            {
+                singleProcessCPUChart.Series[0].Points.AddXY(i, this.singleCPUUsageValues[i]);
+                singleProcessCPUChart.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             }
         }
 

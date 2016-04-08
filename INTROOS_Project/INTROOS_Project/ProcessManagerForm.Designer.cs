@@ -29,13 +29,19 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProcessManagerForm));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.ProcessesTab = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.processTabControl = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.cpuUsageLbl = new System.Windows.Forms.Label();
             this.viewUsageBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -59,16 +65,16 @@
             this.MemoryTab = new System.Windows.Forms.TabPage();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.refreshTimer = new System.Windows.Forms.Timer(this.components);
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.singleProcessCPUChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabControl.SuspendLayout();
             this.ProcessesTab.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.processTabControl.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.processListGridView)).BeginInit();
             this.CPUTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CPUChart)).BeginInit();
-            this.tabControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.singleProcessCPUChart)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -108,15 +114,47 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.tabControl1);
+            this.groupBox1.Controls.Add(this.processTabControl);
             this.groupBox1.Controls.Add(this.cpuUsageLbl);
             this.groupBox1.Controls.Add(this.viewUsageBtn);
             this.groupBox1.Location = new System.Drawing.Point(174, 17);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(521, 164);
+            this.groupBox1.Size = new System.Drawing.Size(521, 182);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " Properties ";
+            // 
+            // processTabControl
+            // 
+            this.processTabControl.Controls.Add(this.tabPage1);
+            this.processTabControl.Controls.Add(this.tabPage2);
+            this.processTabControl.Location = new System.Drawing.Point(133, 16);
+            this.processTabControl.Name = "processTabControl";
+            this.processTabControl.SelectedIndex = 0;
+            this.processTabControl.Size = new System.Drawing.Size(388, 166);
+            this.processTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.processTabControl.TabIndex = 3;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.singleProcessCPUChart);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(380, 140);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "CPU Usage";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(380, 140);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Memory Usage";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // cpuUsageLbl
             // 
@@ -161,12 +199,12 @@
             this.processListGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.processListGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.processListGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.processListGridView.Location = new System.Drawing.Point(15, 187);
+            this.processListGridView.Location = new System.Drawing.Point(15, 205);
             this.processListGridView.Name = "processListGridView";
             this.processListGridView.ReadOnly = true;
             this.processListGridView.RowHeadersVisible = false;
             this.processListGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.processListGridView.Size = new System.Drawing.Size(680, 290);
+            this.processListGridView.Size = new System.Drawing.Size(680, 272);
             this.processListGridView.TabIndex = 11;
             // 
             // processTxt
@@ -324,20 +362,20 @@
             // CPUChart
             // 
             this.CPUChart.BackColor = System.Drawing.Color.Transparent;
-            chartArea9.BackColor = System.Drawing.Color.Transparent;
-            chartArea9.Name = "ChartArea1";
-            this.CPUChart.ChartAreas.Add(chartArea9);
-            legend9.Name = "Legend1";
-            this.CPUChart.Legends.Add(legend9);
+            chartArea2.BackColor = System.Drawing.Color.Transparent;
+            chartArea2.Name = "ChartArea1";
+            this.CPUChart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.CPUChart.Legends.Add(legend2);
             this.CPUChart.Location = new System.Drawing.Point(6, 175);
             this.CPUChart.Name = "CPUChart";
-            series9.BorderColor = System.Drawing.Color.Green;
-            series9.BorderWidth = 3;
-            series9.ChartArea = "ChartArea1";
-            series9.Color = System.Drawing.Color.Green;
-            series9.Legend = "Legend1";
-            series9.Name = "Series1";
-            this.CPUChart.Series.Add(series9);
+            series2.BorderColor = System.Drawing.Color.Green;
+            series2.BorderWidth = 3;
+            series2.ChartArea = "ChartArea1";
+            series2.Color = System.Drawing.Color.Green;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.CPUChart.Series.Add(series2);
             this.CPUChart.Size = new System.Drawing.Size(703, 316);
             this.CPUChart.TabIndex = 0;
             this.CPUChart.Text = "chart1";
@@ -365,38 +403,26 @@
             // refreshTimer
             // 
             this.refreshTimer.Enabled = true;
-            this.refreshTimer.Interval = 1500;
+            this.refreshTimer.Interval = 1000;
             this.refreshTimer.Tick += new System.EventHandler(this.refreshTimer_Tick);
             // 
-            // tabControl1
+            // singleProcessCPUChart
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(133, 16);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(388, 148);
-            this.tabControl1.TabIndex = 3;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(380, 122);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(192, 74);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            chartArea1.Name = "ChartArea1";
+            this.singleProcessCPUChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.singleProcessCPUChart.Legends.Add(legend1);
+            this.singleProcessCPUChart.Location = new System.Drawing.Point(4, 4);
+            this.singleProcessCPUChart.Name = "singleProcessCPUChart";
+            series1.BorderColor = System.Drawing.SystemColors.MenuHighlight;
+            series1.BorderWidth = 3;
+            series1.ChartArea = "ChartArea1";
+            series1.Color = System.Drawing.SystemColors.MenuHighlight;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.singleProcessCPUChart.Series.Add(series1);
+            this.singleProcessCPUChart.Size = new System.Drawing.Size(373, 133);
+            this.singleProcessCPUChart.TabIndex = 0;
             // 
             // ProcessManagerForm
             // 
@@ -412,11 +438,13 @@
             this.ProcessesTab.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.processTabControl.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.processListGridView)).EndInit();
             this.CPUTab.ResumeLayout(false);
             this.CPUTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CPUChart)).EndInit();
-            this.tabControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.singleProcessCPUChart)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -449,8 +477,9 @@
         private System.Windows.Forms.Label procNumOfCoresLbl;
         private System.Windows.Forms.Label procMaxClockSpeedLbl;
         private System.Windows.Forms.Timer refreshTimer;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl processTabControl;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.DataVisualization.Charting.Chart singleProcessCPUChart;
     }
 }
