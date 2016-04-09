@@ -61,11 +61,13 @@ namespace INTROOS_Project
             initializeMemoryChart();
             initializeSingleProcessCPUChart();
             loadProcessList();
+            Console.WriteLine("Done Loading");
             refreshTimer.Enabled = true ;  
         }
 
         private void refreshTimer_Tick(object sender, EventArgs e)
         {
+            Console.WriteLine("Refresh");
             int currentRow = processListGridView.FirstDisplayedScrollingRowIndex;
             int currentColumn = processListGridView.FirstDisplayedScrollingColumnIndex;
             int currentCell = processListGridView.CurrentCell.RowIndex;
@@ -195,8 +197,11 @@ namespace INTROOS_Project
 
         private void loadProcessorInformation()
         {
+            Console.WriteLine("Loading " + "Processor Name");
             this.processorName = this.GetComponent("Win32_Processor", "Name");
+            Console.WriteLine("Loading " + "Processor Description");
             this.processorDescription = this.GetComponent("Win32_Processor", "Description");
+            Console.WriteLine("Loading " + "Processor Architecture");
             this.processorArchitecture = this.GetComponent("Win32_Processor", "Architecture");
             switch (this.processorArchitecture)
             {
@@ -209,7 +214,9 @@ namespace INTROOS_Project
                 case "9": this.processorArchitecture = "x64"; break;
                 default: break;
             }
+            Console.WriteLine("Loading " + "Processor Number of Cores");
             this.processorNumberOfCores = this.GetComponent("Win32_Processor", "NumberOfCores");
+            Console.WriteLine("Loading " + "Processor Max Clock Speed");
             this.processorMaxClockSpeed = this.GetComponent("Win32_Processor", "MaxClockSpeed");
             this.processorMaxClockSpeed = (Convert.ToInt32(this.processorMaxClockSpeed) / 1000.0).ToString() + "GHz";
 
@@ -234,9 +241,12 @@ namespace INTROOS_Project
 
         private void loadMemoryInformation()
         {
+            Console.WriteLine("Loading " + "Memory Manufacturer");
             this.memoryManufacturer = this.GetComponent("Win32_PhysicalMemory", "Manufacturer");
+            Console.WriteLine("Loading " + "Memory Capacity");
             this.memoryCapacity = this.GetComponent("Win32_PhysicalMemory", "Capacity");
             this.memoryCapacity = (Convert.ToInt64(this.memoryCapacity) / 1073741824).ToString();
+            Console.WriteLine("Loading " + "Memory Type");
             this.memoryMemoryType = this.GetComponent("Win32_PhysicalMemory", "MemoryType");
             switch (this.memoryMemoryType)
             {
@@ -268,8 +278,11 @@ namespace INTROOS_Project
                 case "25": this.memoryMemoryType = "FBD2"; break;
                 default: break;
             }
+            Console.WriteLine("Loading " + "Memory Description");
             this.memoryDescription = this.GetComponent("Win32_PhysicalMemory", "Description");
+            Console.WriteLine("Loading " + "Memory Configured Clock Speed");
             this.memoryConfiguredClockSpeed = this.GetComponent("Win32_PhysicalMemory", "ConfiguredClockSpeed") + "MHz";
+            Console.WriteLine("Loading " + "Memory Form Factor");
             this.memoryFormFactor = this.GetComponent("Win32_PhysicalMemory", "FormFactor");
             switch (this.memoryFormFactor)
             {
@@ -299,6 +312,7 @@ namespace INTROOS_Project
                 case "23": this.memoryFormFactor = "LGA"; break;
                 default: break;
             }
+            Console.WriteLine("Loading " + "Memory Type Detail");
             this.memoryTypeDetail = this.GetComponent("Win32_PhysicalMemory", "TypeDetail");
             switch (this.memoryTypeDetail)
             {
