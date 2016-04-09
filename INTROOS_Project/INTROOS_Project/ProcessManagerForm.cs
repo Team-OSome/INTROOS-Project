@@ -46,6 +46,7 @@ namespace INTROOS_Project
             this.cpuCounter.InstanceName = "_Total";
             this.availableRAMCounter = new PerformanceCounter("Memory", "Available MBytes");
             InitializeComponent();
+            refreshTimer.Enabled = false;   
             //Console.WriteLine(this.GetComponent("Win32_PhysicalMemory", "TypeDetail"));
 
         }
@@ -60,6 +61,7 @@ namespace INTROOS_Project
             initializeMemoryChart();
             initializeSingleProcessCPUChart();
             loadProcessList();
+            refreshTimer.Enabled = true ;  
         }
 
         private void refreshTimer_Tick(object sender, EventArgs e)
