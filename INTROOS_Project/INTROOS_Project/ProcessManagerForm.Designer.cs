@@ -30,18 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProcessManagerForm));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.refreshTimer = new System.Windows.Forms.Timer(this.components);
             this.MemoryTab = new System.Windows.Forms.TabPage();
@@ -77,10 +77,12 @@
             this.CPUChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.ProcessesTab = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.processTabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.singleProcessCPUChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.singleProcessMemChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.cpuUsageLbl = new System.Windows.Forms.Label();
             this.viewUsageBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -90,8 +92,8 @@
             this.stopBtn = new System.Windows.Forms.Button();
             this.startBtn = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.singleProcessMemChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.label6 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.memoryUsageLbl = new System.Windows.Forms.Label();
             this.MemoryTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.memoryChart)).BeginInit();
             this.CPUTab.SuspendLayout();
@@ -102,9 +104,9 @@
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.singleProcessCPUChart)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.singleProcessMemChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.processListGridView)).BeginInit();
             this.tabControl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.singleProcessMemChart)).BeginInit();
             this.SuspendLayout();
             // 
             // imageList
@@ -148,13 +150,13 @@
             this.MemoryTab.Name = "MemoryTab";
             this.MemoryTab.Padding = new System.Windows.Forms.Padding(3);
             this.MemoryTab.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.MemoryTab.Size = new System.Drawing.Size(717, 499);
+            this.MemoryTab.Size = new System.Drawing.Size(834, 499);
             this.MemoryTab.TabIndex = 2;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(539, 141);
+            this.label7.Location = new System.Drawing.Point(667, 141);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(22, 13);
             this.label7.TabIndex = 28;
@@ -164,7 +166,7 @@
             // 
             this.memoryInUse.AutoSize = true;
             this.memoryInUse.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.memoryInUse.Location = new System.Drawing.Point(447, 154);
+            this.memoryInUse.Location = new System.Drawing.Point(582, 154);
             this.memoryInUse.Name = "memoryInUse";
             this.memoryInUse.Size = new System.Drawing.Size(102, 17);
             this.memoryInUse.TabIndex = 27;
@@ -175,7 +177,7 @@
             this.memoryInUseLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.memoryInUseLbl.AutoSize = true;
             this.memoryInUseLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.memoryInUseLbl.Location = new System.Drawing.Point(432, 115);
+            this.memoryInUseLbl.Location = new System.Drawing.Point(559, 115);
             this.memoryInUseLbl.Name = "memoryInUseLbl";
             this.memoryInUseLbl.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.memoryInUseLbl.Size = new System.Drawing.Size(119, 46);
@@ -186,7 +188,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(683, 79);
+            this.label4.Location = new System.Drawing.Point(804, 74);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(22, 13);
             this.label4.TabIndex = 25;
@@ -196,7 +198,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(597, 92);
+            this.label5.Location = new System.Drawing.Point(716, 93);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(94, 17);
             this.label5.TabIndex = 24;
@@ -207,7 +209,7 @@
             this.totalMemoryLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.totalMemoryLbl.AutoSize = true;
             this.totalMemoryLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalMemoryLbl.Location = new System.Drawing.Point(576, 53);
+            this.totalMemoryLbl.Location = new System.Drawing.Point(693, 48);
             this.totalMemoryLbl.Name = "totalMemoryLbl";
             this.totalMemoryLbl.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.totalMemoryLbl.Size = new System.Drawing.Size(119, 46);
@@ -218,7 +220,7 @@
             // memAvailableGB
             // 
             this.memAvailableGB.AutoSize = true;
-            this.memAvailableGB.Location = new System.Drawing.Point(683, 141);
+            this.memAvailableGB.Location = new System.Drawing.Point(804, 141);
             this.memAvailableGB.Name = "memAvailableGB";
             this.memAvailableGB.Size = new System.Drawing.Size(22, 13);
             this.memAvailableGB.TabIndex = 22;
@@ -258,7 +260,7 @@
             // 
             this.memAvailable.AutoSize = true;
             this.memAvailable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.memAvailable.Location = new System.Drawing.Point(586, 154);
+            this.memAvailable.Location = new System.Drawing.Point(707, 154);
             this.memAvailable.Name = "memAvailable";
             this.memAvailable.Size = new System.Drawing.Size(119, 17);
             this.memAvailable.TabIndex = 18;
@@ -269,7 +271,7 @@
             this.memAvailableLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.memAvailableLbl.AutoSize = true;
             this.memAvailableLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.memAvailableLbl.Location = new System.Drawing.Point(576, 115);
+            this.memAvailableLbl.Location = new System.Drawing.Point(693, 115);
             this.memAvailableLbl.Name = "memAvailableLbl";
             this.memAvailableLbl.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.memAvailableLbl.Size = new System.Drawing.Size(119, 46);
@@ -331,21 +333,21 @@
             // memoryChart
             // 
             this.memoryChart.BackColor = System.Drawing.Color.Transparent;
-            chartArea5.BackColor = System.Drawing.Color.Transparent;
-            chartArea5.Name = "ChartArea1";
-            this.memoryChart.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            this.memoryChart.Legends.Add(legend5);
+            chartArea1.BackColor = System.Drawing.Color.Transparent;
+            chartArea1.Name = "ChartArea1";
+            this.memoryChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.memoryChart.Legends.Add(legend1);
             this.memoryChart.Location = new System.Drawing.Point(6, 178);
             this.memoryChart.Name = "memoryChart";
-            series5.BorderColor = System.Drawing.Color.DodgerBlue;
-            series5.BorderWidth = 3;
-            series5.ChartArea = "ChartArea1";
-            series5.Color = System.Drawing.Color.DodgerBlue;
-            series5.Legend = "Legend1";
-            series5.Name = "Series1";
-            this.memoryChart.Series.Add(series5);
-            this.memoryChart.Size = new System.Drawing.Size(703, 316);
+            series1.BorderColor = System.Drawing.Color.DodgerBlue;
+            series1.BorderWidth = 3;
+            series1.ChartArea = "ChartArea1";
+            series1.Color = System.Drawing.Color.DodgerBlue;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.memoryChart.Series.Add(series1);
+            this.memoryChart.Size = new System.Drawing.Size(820, 316);
             this.memoryChart.TabIndex = 11;
             this.memoryChart.Text = "chart1";
             // 
@@ -367,7 +369,7 @@
             this.CPUTab.Location = new System.Drawing.Point(154, 4);
             this.CPUTab.Name = "CPUTab";
             this.CPUTab.Padding = new System.Windows.Forms.Padding(3);
-            this.CPUTab.Size = new System.Drawing.Size(717, 499);
+            this.CPUTab.Size = new System.Drawing.Size(834, 499);
             this.CPUTab.TabIndex = 1;
             // 
             // procNumOfCoresLbl
@@ -404,7 +406,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(562, 132);
+            this.label3.Location = new System.Drawing.Point(697, 132);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(97, 17);
             this.label3.TabIndex = 7;
@@ -415,7 +417,7 @@
             this.procCPUUsageLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.procCPUUsageLbl.AutoSize = true;
             this.procCPUUsageLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.procCPUUsageLbl.Location = new System.Drawing.Point(555, 86);
+            this.procCPUUsageLbl.Location = new System.Drawing.Point(672, 86);
             this.procCPUUsageLbl.Name = "procCPUUsageLbl";
             this.procCPUUsageLbl.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.procCPUUsageLbl.Size = new System.Drawing.Size(154, 46);
@@ -477,21 +479,21 @@
             // CPUChart
             // 
             this.CPUChart.BackColor = System.Drawing.Color.Transparent;
-            chartArea6.BackColor = System.Drawing.Color.Transparent;
-            chartArea6.Name = "ChartArea1";
-            this.CPUChart.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            this.CPUChart.Legends.Add(legend6);
+            chartArea2.BackColor = System.Drawing.Color.Transparent;
+            chartArea2.Name = "ChartArea1";
+            this.CPUChart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.CPUChart.Legends.Add(legend2);
             this.CPUChart.Location = new System.Drawing.Point(6, 178);
             this.CPUChart.Name = "CPUChart";
-            series6.BorderColor = System.Drawing.Color.Green;
-            series6.BorderWidth = 3;
-            series6.ChartArea = "ChartArea1";
-            series6.Color = System.Drawing.Color.Green;
-            series6.Legend = "Legend1";
-            series6.Name = "Series1";
-            this.CPUChart.Series.Add(series6);
-            this.CPUChart.Size = new System.Drawing.Size(703, 316);
+            series2.BorderColor = System.Drawing.Color.Green;
+            series2.BorderWidth = 3;
+            series2.ChartArea = "ChartArea1";
+            series2.Color = System.Drawing.Color.Green;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.CPUChart.Series.Add(series2);
+            this.CPUChart.Size = new System.Drawing.Size(820, 316);
             this.CPUChart.TabIndex = 0;
             this.CPUChart.Text = "chart1";
             // 
@@ -511,77 +513,108 @@
             this.ProcessesTab.Location = new System.Drawing.Point(154, 4);
             this.ProcessesTab.Name = "ProcessesTab";
             this.ProcessesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ProcessesTab.Size = new System.Drawing.Size(717, 499);
+            this.ProcessesTab.Size = new System.Drawing.Size(834, 499);
             this.ProcessesTab.TabIndex = 0;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.memoryUsageLbl);
+            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.processTabControl);
             this.groupBox1.Controls.Add(this.cpuUsageLbl);
             this.groupBox1.Controls.Add(this.viewUsageBtn);
             this.groupBox1.Location = new System.Drawing.Point(174, 17);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(521, 182);
+            this.groupBox1.Size = new System.Drawing.Size(639, 182);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " Properties ";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 66);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(66, 13);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "CPU Usage:";
             // 
             // processTabControl
             // 
             this.processTabControl.Controls.Add(this.tabPage1);
             this.processTabControl.Controls.Add(this.tabPage2);
-            this.processTabControl.Location = new System.Drawing.Point(133, 16);
+            this.processTabControl.Location = new System.Drawing.Point(179, 16);
             this.processTabControl.Name = "processTabControl";
             this.processTabControl.SelectedIndex = 0;
-            this.processTabControl.Size = new System.Drawing.Size(388, 166);
+            this.processTabControl.Size = new System.Drawing.Size(460, 166);
             this.processTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.processTabControl.TabIndex = 3;
             // 
             // tabPage1
             // 
+            this.tabPage1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tabPage1.Controls.Add(this.singleProcessCPUChart);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(380, 140);
+            this.tabPage1.Size = new System.Drawing.Size(452, 140);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "CPU Usage";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // singleProcessCPUChart
             // 
-            chartArea7.Name = "ChartArea1";
-            this.singleProcessCPUChart.ChartAreas.Add(chartArea7);
-            legend7.Name = "Legend1";
-            this.singleProcessCPUChart.Legends.Add(legend7);
-            this.singleProcessCPUChart.Location = new System.Drawing.Point(4, 4);
+            this.singleProcessCPUChart.BackColor = System.Drawing.Color.Transparent;
+            chartArea3.Name = "ChartArea1";
+            this.singleProcessCPUChart.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.singleProcessCPUChart.Legends.Add(legend3);
+            this.singleProcessCPUChart.Location = new System.Drawing.Point(3, 4);
             this.singleProcessCPUChart.Name = "singleProcessCPUChart";
-            series7.BorderColor = System.Drawing.Color.Green;
-            series7.BorderWidth = 3;
-            series7.ChartArea = "ChartArea1";
-            series7.Color = System.Drawing.Color.Green;
-            series7.Legend = "Legend1";
-            series7.Name = "Series1";
-            this.singleProcessCPUChart.Series.Add(series7);
-            this.singleProcessCPUChart.Size = new System.Drawing.Size(373, 133);
+            series3.BorderColor = System.Drawing.Color.Green;
+            series3.BorderWidth = 3;
+            series3.ChartArea = "ChartArea1";
+            series3.Color = System.Drawing.Color.Green;
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.singleProcessCPUChart.Series.Add(series3);
+            this.singleProcessCPUChart.Size = new System.Drawing.Size(446, 133);
             this.singleProcessCPUChart.TabIndex = 0;
             // 
             // tabPage2
             // 
+            this.tabPage2.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tabPage2.Controls.Add(this.singleProcessMemChart);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(380, 140);
+            this.tabPage2.Size = new System.Drawing.Size(452, 140);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Memory Usage";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // singleProcessMemChart
+            // 
+            this.singleProcessMemChart.BackColor = System.Drawing.Color.Transparent;
+            chartArea4.Name = "ChartArea1";
+            this.singleProcessMemChart.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.singleProcessMemChart.Legends.Add(legend4);
+            this.singleProcessMemChart.Location = new System.Drawing.Point(3, 4);
+            this.singleProcessMemChart.Name = "singleProcessMemChart";
+            series4.BorderColor = System.Drawing.Color.DodgerBlue;
+            series4.BorderWidth = 3;
+            series4.ChartArea = "ChartArea1";
+            series4.Color = System.Drawing.Color.DodgerBlue;
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.singleProcessMemChart.Series.Add(series4);
+            this.singleProcessMemChart.Size = new System.Drawing.Size(446, 133);
+            this.singleProcessMemChart.TabIndex = 1;
             // 
             // cpuUsageLbl
             // 
             this.cpuUsageLbl.AutoSize = true;
-            this.cpuUsageLbl.Location = new System.Drawing.Point(72, 66);
+            this.cpuUsageLbl.Location = new System.Drawing.Point(78, 66);
             this.cpuUsageLbl.Name = "cpuUsageLbl";
             this.cpuUsageLbl.Size = new System.Drawing.Size(0, 13);
             this.cpuUsageLbl.TabIndex = 2;
@@ -592,14 +625,14 @@
             this.viewUsageBtn.Name = "viewUsageBtn";
             this.viewUsageBtn.Size = new System.Drawing.Size(120, 34);
             this.viewUsageBtn.TabIndex = 1;
-            this.viewUsageBtn.Text = "View CPU Usage";
+            this.viewUsageBtn.Text = "View Usage";
             this.viewUsageBtn.UseVisualStyleBackColor = true;
             this.viewUsageBtn.Click += new System.EventHandler(this.viewUsageBtn_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 140);
+            this.label2.Location = new System.Drawing.Point(17, 140);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(121, 13);
             this.label2.TabIndex = 13;
@@ -608,7 +641,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 17);
+            this.label1.Location = new System.Drawing.Point(17, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 12;
@@ -626,19 +659,19 @@
             this.processListGridView.ReadOnly = true;
             this.processListGridView.RowHeadersVisible = false;
             this.processListGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.processListGridView.Size = new System.Drawing.Size(680, 272);
+            this.processListGridView.Size = new System.Drawing.Size(798, 272);
             this.processListGridView.TabIndex = 11;
             // 
             // processTxt
             // 
-            this.processTxt.Location = new System.Drawing.Point(15, 33);
+            this.processTxt.Location = new System.Drawing.Point(20, 33);
             this.processTxt.Name = "processTxt";
             this.processTxt.Size = new System.Drawing.Size(132, 20);
             this.processTxt.TabIndex = 10;
             // 
             // stopBtn
             // 
-            this.stopBtn.Location = new System.Drawing.Point(12, 156);
+            this.stopBtn.Location = new System.Drawing.Point(17, 156);
             this.stopBtn.Name = "stopBtn";
             this.stopBtn.Size = new System.Drawing.Size(132, 23);
             this.stopBtn.TabIndex = 9;
@@ -648,7 +681,7 @@
             // 
             // startBtn
             // 
-            this.startBtn.Location = new System.Drawing.Point(15, 59);
+            this.startBtn.Location = new System.Drawing.Point(20, 59);
             this.startBtn.Name = "startBtn";
             this.startBtn.Size = new System.Drawing.Size(132, 23);
             this.startBtn.TabIndex = 8;
@@ -668,42 +701,32 @@
             this.tabControl.Multiline = true;
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(875, 507);
+            this.tabControl.Size = new System.Drawing.Size(992, 507);
             this.tabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl.TabIndex = 0;
             // 
-            // singleProcessMemChart
+            // label8
             // 
-            chartArea8.Name = "ChartArea1";
-            this.singleProcessMemChart.ChartAreas.Add(chartArea8);
-            legend8.Name = "Legend1";
-            this.singleProcessMemChart.Legends.Add(legend8);
-            this.singleProcessMemChart.Location = new System.Drawing.Point(4, 4);
-            this.singleProcessMemChart.Name = "singleProcessMemChart";
-            series8.BorderColor = System.Drawing.Color.DodgerBlue;
-            series8.BorderWidth = 3;
-            series8.ChartArea = "ChartArea1";
-            series8.Color = System.Drawing.Color.DodgerBlue;
-            series8.Legend = "Legend1";
-            series8.Name = "Series1";
-            this.singleProcessMemChart.Series.Add(series8);
-            this.singleProcessMemChart.Size = new System.Drawing.Size(373, 133);
-            this.singleProcessMemChart.TabIndex = 1;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 83);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(81, 13);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "Memory Usage:";
             // 
-            // label6
+            // memoryUsageLbl
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 66);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(66, 13);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "CPU Usage:";
+            this.memoryUsageLbl.AutoSize = true;
+            this.memoryUsageLbl.Location = new System.Drawing.Point(93, 83);
+            this.memoryUsageLbl.Name = "memoryUsageLbl";
+            this.memoryUsageLbl.Size = new System.Drawing.Size(0, 13);
+            this.memoryUsageLbl.TabIndex = 6;
             // 
             // ProcessManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(899, 531);
+            this.ClientSize = new System.Drawing.Size(1016, 531);
             this.Controls.Add(this.tabControl);
             this.Name = "ProcessManagerForm";
             this.Text = "ProcessManagerForm";
@@ -722,9 +745,9 @@
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.singleProcessCPUChart)).EndInit();
             this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.singleProcessMemChart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.processListGridView)).EndInit();
             this.tabControl.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.singleProcessMemChart)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -781,5 +804,7 @@
         private System.Windows.Forms.Label totalMemoryLbl;
         private System.Windows.Forms.DataVisualization.Charting.Chart singleProcessMemChart;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label memoryUsageLbl;
+        private System.Windows.Forms.Label label8;
     }
 }

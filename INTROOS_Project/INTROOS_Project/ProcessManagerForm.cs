@@ -15,6 +15,7 @@ namespace INTROOS_Project
     public partial class ProcessManagerForm : Form
     {
         private PerformanceCounter pcProcess;
+        private PerformanceCounter processMemory;
         private PerformanceCounter cpuCounter;
         private PerformanceCounter availableRAMCounter;
 
@@ -60,6 +61,7 @@ namespace INTROOS_Project
             initializeCPUChart();
             initializeMemoryChart();
             initializeSingleProcessCPUChart();
+            initializeSingleMemoryChart();
             loadProcessList();
             Console.WriteLine("Done Loading");
             refreshTimer.Enabled = true ;  
@@ -81,6 +83,7 @@ namespace INTROOS_Project
             updateCPUChart();
             updateMemoryChart();
             updateSingleProcessCPUChart();
+            updateSingleMemoryChart();
         }
 
 
@@ -118,6 +121,7 @@ namespace INTROOS_Project
             if (processListGridView.CurrentCell != null)
             {
                 pcProcess = new PerformanceCounter("Process", "% Processor Time", processListGridView.Rows[processListGridView.CurrentCell.RowIndex].Cells[0].Value.ToString());
+                processMemory = new PerformanceCounter("Process", "Working Set", processListGridView.Rows[processListGridView.CurrentCell.RowIndex].Cells[0].Value.ToString());
             }
             else
             {
@@ -503,9 +507,10 @@ namespace INTROOS_Project
                 singleProcessCPUChart.Series[0].Points.AddXY(i, this.singleCPUUsageValues[i]);
                 singleProcessCPUChart.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             }
-        }
 
-        /*
+            
+        }
+      
         private void initializeSingleMemoryChart()
         {
             this.singleMemoryUsageValues = new float[50];
@@ -516,8 +521,8 @@ namespace INTROOS_Project
             singleProcessMemChart.ChartAreas[0].AxisX.Minimum = 0;
             singleProcessMemChart.ChartAreas[0].AxisX.Maximum = 50;
             singleProcessMemChart.ChartAreas[0].AxisY.Minimum = 0;
-            singleProcessMemChart.ChartAreas[0].AxisY.Maximum = 100;
-            singleProcessMemChart.ChartAreas[0].AxisY.ScaleView.Zoom(0, 100); // -15<= y <=15
+            singleProcessMemChart.ChartAreas[0].AxisY.Maximum = Convert.ToInt64(this.memoryCapacity);
+            singleProcessMemChart.ChartAreas[0].AxisY.ScaleView.Zoom(0, Convert.ToInt64(this.memoryCapacity)); // -15<= y <=15
             singleProcessMemChart.ChartAreas[0].AxisX.ScaleView.Zoom(1, 50); // -15 <= x <= 2
             singleProcessMemChart.ChartAreas[0].CursorX.IsUserEnabled = true;
             singleProcessMemChart.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
@@ -529,44 +534,37 @@ namespace INTROOS_Project
         private void updateSingleMemoryChart()
         {
             float[] temp = new float[50];
-            float availableMemory;
-            float totalMemory;
 
-            foreach (var series in memoryChart.Series)
+            foreach (var series in singleProcessMemChart.Series)
             {
                 series.Points.Clear();
             }
 
-            availableMemory = this.availableRAMCounter.NextValue() / 1024;
-            if (availableMemory.ToString("n2").Length < 5) memAvailableLbl.Text = availableMemory.ToString("n3");
-            else memAvailableLbl.Text = availableMemory.ToString("n2");
-
-            totalMemory = (float)new Microsoft.VisualBasic.Devices.ComputerInfo().TotalPhysicalMemory / 1024 / 1024 / 1024;
-            if (totalMemory.ToString("n2").Length < 5) totalMemoryLbl.Text = totalMemory.ToString("n3");
-            else totalMemoryLbl.Text = totalMemory.ToString("n2");
-
-            temp[49] = totalMemory - availableMemory;
-            if (temp[49].ToString("n2").Length < 5) memoryInUseLbl.Text = temp[49].ToString("n3");
-            else memoryInUseLbl.Text = temp[49].ToString("n2");
-
+            if (pcProcess != null)
+            {
+                temp[49] = this.processMemory.NextValue() / 1024 / 1024;
+                if (temp[49].ToString("n2").Length < 5) memoryUsageLbl.Text = temp[49].ToString("n3") + " MB";
+                else memoryUsageLbl.Text = temp[49].ToString("n2") + " MB";
+                temp[49] = temp[49] / 1024;
+            }
 
             for (int i = 0; i < 49; i++)
             {
-                temp[i] = this.memoryUsageValues[i + 1];
+                temp[i] = this.singleMemoryUsageValues[i + 1];
             }
 
             for (int i = 0; i < 50; i++)
             {
-                this.memoryUsageValues[i] = temp[i];
+                this.singleMemoryUsageValues[i] = temp[i];
             }
 
             for (int i = 0; i < 50; i++)
             {
-                memoryChart.Series[0].Points.AddXY(i, this.memoryUsageValues[i]);
-                memoryChart.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+                singleProcessMemChart.Series[0].Points.AddXY(i, this.singleMemoryUsageValues[i]);
+                singleProcessMemChart.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             }
         }
-        */
+        
         #endregion
     }
 }
