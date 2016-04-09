@@ -242,95 +242,151 @@ namespace INTROOS_Project
         private void loadMemoryInformation()
         {
             Console.WriteLine("Loading " + "Memory Manufacturer");
-            this.memoryManufacturer = this.GetComponent("Win32_PhysicalMemory", "Manufacturer");
+            try
+            {
+                this.memoryManufacturer = this.GetComponent("Win32_PhysicalMemory", "Manufacturer");
+            }
+            catch (Exception)
+            {
+                this.memoryManufacturer = "Swag";
+            }
+            
             Console.WriteLine("Loading " + "Memory Capacity");
-            this.memoryCapacity = this.GetComponent("Win32_PhysicalMemory", "Capacity");
-            this.memoryCapacity = (Convert.ToInt64(this.memoryCapacity) / 1073741824).ToString();
+            try
+            {
+                this.memoryCapacity = this.GetComponent("Win32_PhysicalMemory", "Capacity");
+                this.memoryCapacity = (Convert.ToInt64(this.memoryCapacity) / 1073741824).ToString();
+            }
+            catch (Exception)
+            {
+                this.memoryCapacity = "Swag";
+            }
+
             Console.WriteLine("Loading " + "Memory Type");
-            this.memoryMemoryType = this.GetComponent("Win32_PhysicalMemory", "MemoryType");
-            switch (this.memoryMemoryType)
+            try
             {
-                case "0": this.memoryMemoryType = "Unknown"; break;
-                case "1": this.memoryMemoryType = "Other"; break;
-                case "2": this.memoryMemoryType = "DRAM"; break;
-                case "3": this.memoryMemoryType = "Synchronous DRAM"; break;
-                case "4": this.memoryMemoryType = "Cache DRAM"; break;
-                case "5": this.memoryMemoryType = "EDO"; break;
-                case "6": this.memoryMemoryType = "EDRAM"; break;
-                case "7": this.memoryMemoryType = "VRAM"; break;
-                case "8": this.memoryMemoryType = "SRAM"; break;
-                case "9": this.memoryMemoryType = "RAM"; break;
-                case "10": this.memoryMemoryType = "ROM"; break;
-                case "11": this.memoryMemoryType = "Flash"; break;
-                case "12": this.memoryMemoryType = "EEPROM"; break;
-                case "13": this.memoryMemoryType = "FEPROM"; break;
-                case "14": this.memoryMemoryType = "EPROM"; break;
-                case "15": this.memoryMemoryType = "CDRAM"; break;
-                case "16": this.memoryMemoryType = "3DRAM"; break;
-                case "17": this.memoryMemoryType = "SDRAM"; break;
-                case "18": this.memoryMemoryType = "SGRAM"; break;
-                case "19": this.memoryMemoryType = "RDRAM"; break;
-                case "20": this.memoryMemoryType = "DDR"; break;
-                case "21": this.memoryMemoryType = "DDR2"; break;
-                case "22": this.memoryMemoryType = "DDR2"; break;
-                case "23": this.memoryMemoryType = "DDR2 FB-DIMM"; break;
-                case "24": this.memoryMemoryType = "DDR3"; break;
-                case "25": this.memoryMemoryType = "FBD2"; break;
-                default: break;
+                this.memoryMemoryType = this.GetComponent("Win32_PhysicalMemory", "MemoryType");
+                switch (this.memoryMemoryType)
+                {
+                    case "0": this.memoryMemoryType = "Unknown"; break;
+                    case "1": this.memoryMemoryType = "Other"; break;
+                    case "2": this.memoryMemoryType = "DRAM"; break;
+                    case "3": this.memoryMemoryType = "Synchronous DRAM"; break;
+                    case "4": this.memoryMemoryType = "Cache DRAM"; break;
+                    case "5": this.memoryMemoryType = "EDO"; break;
+                    case "6": this.memoryMemoryType = "EDRAM"; break;
+                    case "7": this.memoryMemoryType = "VRAM"; break;
+                    case "8": this.memoryMemoryType = "SRAM"; break;
+                    case "9": this.memoryMemoryType = "RAM"; break;
+                    case "10": this.memoryMemoryType = "ROM"; break;
+                    case "11": this.memoryMemoryType = "Flash"; break;
+                    case "12": this.memoryMemoryType = "EEPROM"; break;
+                    case "13": this.memoryMemoryType = "FEPROM"; break;
+                    case "14": this.memoryMemoryType = "EPROM"; break;
+                    case "15": this.memoryMemoryType = "CDRAM"; break;
+                    case "16": this.memoryMemoryType = "3DRAM"; break;
+                    case "17": this.memoryMemoryType = "SDRAM"; break;
+                    case "18": this.memoryMemoryType = "SGRAM"; break;
+                    case "19": this.memoryMemoryType = "RDRAM"; break;
+                    case "20": this.memoryMemoryType = "DDR"; break;
+                    case "21": this.memoryMemoryType = "DDR2"; break;
+                    case "22": this.memoryMemoryType = "DDR2"; break;
+                    case "23": this.memoryMemoryType = "DDR2 FB-DIMM"; break;
+                    case "24": this.memoryMemoryType = "DDR3"; break;
+                    case "25": this.memoryMemoryType = "FBD2"; break;
+                    default: break;
+                }
             }
+            catch (Exception)
+            {
+                this.memoryMemoryType = "Swag";
+            }
+            
             Console.WriteLine("Loading " + "Memory Description");
-            this.memoryDescription = this.GetComponent("Win32_PhysicalMemory", "Description");
+            try
+            {
+                this.memoryDescription = this.GetComponent("Win32_PhysicalMemory", "Description");
+            }
+            catch (Exception)
+            {
+                this.memoryDescription = "Swag";
+            }
+            
             Console.WriteLine("Loading " + "Memory Configured Clock Speed");
-            this.memoryConfiguredClockSpeed = this.GetComponent("Win32_PhysicalMemory", "ConfiguredClockSpeed") + "MHz";
+            try
+            {
+                this.memoryConfiguredClockSpeed = this.GetComponent("Win32_PhysicalMemory", "ConfiguredClockSpeed") + "MHz";
+            }
+            catch (Exception)
+            {
+                this.memoryConfiguredClockSpeed = "Swag";
+            }
+            
             Console.WriteLine("Loading " + "Memory Form Factor");
-            this.memoryFormFactor = this.GetComponent("Win32_PhysicalMemory", "FormFactor");
-            switch (this.memoryFormFactor)
+            try
             {
-                case "0": this.memoryFormFactor = "Unknown"; break;
-                case "1": this.memoryFormFactor = "Other"; break;
-                case "2": this.memoryFormFactor = "SIP"; break;
-                case "3": this.memoryFormFactor = "DIP"; break;
-                case "4": this.memoryFormFactor = "ZIP"; break;
-                case "5": this.memoryFormFactor = "SOJ"; break;
-                case "6": this.memoryFormFactor = "Proprietary"; break;
-                case "7": this.memoryFormFactor = "SIMM"; break;
-                case "8": this.memoryFormFactor = "DIMM"; break;
-                case "9": this.memoryFormFactor = "TSOP"; break;
-                case "10": this.memoryFormFactor = "PGA"; break;
-                case "11": this.memoryFormFactor = "RIMM"; break;
-                case "12": this.memoryFormFactor = "SODIMM"; break;
-                case "13": this.memoryFormFactor = "SRIMM"; break;
-                case "14": this.memoryFormFactor = "SMD"; break;
-                case "15": this.memoryFormFactor = "SSMP"; break;
-                case "16": this.memoryFormFactor = "QFP"; break;
-                case "17": this.memoryFormFactor = "TQFP"; break;
-                case "18": this.memoryFormFactor = "SOIC"; break;
-                case "19": this.memoryFormFactor = "LCC"; break;
-                case "20": this.memoryFormFactor = "PLCC"; break;
-                case "21": this.memoryFormFactor = "BGA"; break;
-                case "22": this.memoryFormFactor = "FPBGA"; break;
-                case "23": this.memoryFormFactor = "LGA"; break;
-                default: break;
+                this.memoryFormFactor = this.GetComponent("Win32_PhysicalMemory", "FormFactor");
+                switch (this.memoryFormFactor)
+                {
+                    case "0": this.memoryFormFactor = "Unknown"; break;
+                    case "1": this.memoryFormFactor = "Other"; break;
+                    case "2": this.memoryFormFactor = "SIP"; break;
+                    case "3": this.memoryFormFactor = "DIP"; break;
+                    case "4": this.memoryFormFactor = "ZIP"; break;
+                    case "5": this.memoryFormFactor = "SOJ"; break;
+                    case "6": this.memoryFormFactor = "Proprietary"; break;
+                    case "7": this.memoryFormFactor = "SIMM"; break;
+                    case "8": this.memoryFormFactor = "DIMM"; break;
+                    case "9": this.memoryFormFactor = "TSOP"; break;
+                    case "10": this.memoryFormFactor = "PGA"; break;
+                    case "11": this.memoryFormFactor = "RIMM"; break;
+                    case "12": this.memoryFormFactor = "SODIMM"; break;
+                    case "13": this.memoryFormFactor = "SRIMM"; break;
+                    case "14": this.memoryFormFactor = "SMD"; break;
+                    case "15": this.memoryFormFactor = "SSMP"; break;
+                    case "16": this.memoryFormFactor = "QFP"; break;
+                    case "17": this.memoryFormFactor = "TQFP"; break;
+                    case "18": this.memoryFormFactor = "SOIC"; break;
+                    case "19": this.memoryFormFactor = "LCC"; break;
+                    case "20": this.memoryFormFactor = "PLCC"; break;
+                    case "21": this.memoryFormFactor = "BGA"; break;
+                    case "22": this.memoryFormFactor = "FPBGA"; break;
+                    case "23": this.memoryFormFactor = "LGA"; break;
+                    default: this.memoryFormFactor = "Swag"; break;
+                }
             }
+            catch (Exception)
+            {
+                this.memoryFormFactor = "Swag";
+            }
+            
             Console.WriteLine("Loading " + "Memory Type Detail");
-            this.memoryTypeDetail = this.GetComponent("Win32_PhysicalMemory", "TypeDetail");
-            switch (this.memoryTypeDetail)
+            try
             {
-                case "1": this.memoryTypeDetail = "Reserved"; break;
-                case "2": this.memoryTypeDetail = "Other"; break;
-                case "4": this.memoryTypeDetail = "Unknown"; break;
-                case "8": this.memoryTypeDetail = "Fast-paged"; break;
-                case "16": this.memoryTypeDetail = "Static column"; break;
-                case "32": this.memoryTypeDetail = "Pseudo-static"; break;
-                case "64": this.memoryTypeDetail = "RAMBUS"; break;
-                case "128": this.memoryTypeDetail = "Synchronous"; break;
-                case "256": this.memoryTypeDetail = "CMOS"; break;
-                case "512": this.memoryTypeDetail = "EDO"; break;
-                case "1024": this.memoryTypeDetail = "Window DRAM"; break;
-                case "2048": this.memoryTypeDetail = "Cache DRAM"; break;
-                case "4096": this.memoryTypeDetail = "Nonvolatile"; break;
-                default: break;
+                this.memoryTypeDetail = this.GetComponent("Win32_PhysicalMemory", "TypeDetail");
+                switch (this.memoryTypeDetail)
+                {
+                    case "1": this.memoryTypeDetail = "Reserved"; break;
+                    case "2": this.memoryTypeDetail = "Other"; break;
+                    case "4": this.memoryTypeDetail = "Unknown"; break;
+                    case "8": this.memoryTypeDetail = "Fast-paged"; break;
+                    case "16": this.memoryTypeDetail = "Static column"; break;
+                    case "32": this.memoryTypeDetail = "Pseudo-static"; break;
+                    case "64": this.memoryTypeDetail = "RAMBUS"; break;
+                    case "128": this.memoryTypeDetail = "Synchronous"; break;
+                    case "256": this.memoryTypeDetail = "CMOS"; break;
+                    case "512": this.memoryTypeDetail = "EDO"; break;
+                    case "1024": this.memoryTypeDetail = "Window DRAM"; break;
+                    case "2048": this.memoryTypeDetail = "Cache DRAM"; break;
+                    case "4096": this.memoryTypeDetail = "Nonvolatile"; break;
+                    default: this.memoryTypeDetail = "Swag"; break;
+                }
             }
+            catch (Exception)
+            {
+                this.memoryTypeDetail = "Swag";
+            }
+            
 
             memoryNameLbl.Text = this.memoryManufacturer + " " + this.memoryCapacity + "GB" + " " + this.memoryMemoryType;
             memoryDescriptionLbl.Text = this.memoryDescription;
