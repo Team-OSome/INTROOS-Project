@@ -16,7 +16,7 @@ namespace INTROOS_Project
     {
         private PerformanceCounter pcProcess;
         private PerformanceCounter cpuCounter;
-        private PerformanceCounter ramCounter;
+        private PerformanceCounter availableRAMCounter;
 
         private string processorName;
         private string processorDescription;
@@ -24,8 +24,19 @@ namespace INTROOS_Project
         private string processorNumberOfCores;
         private string processorMaxClockSpeed;
 
+        private string memoryManufacturer;
+        private string memoryCapacity;
+        private string memoryMemoryType;
+        private string memoryDescription;
+        private string memoryConfiguredClockSpeed;
+        private string memoryFormFactor;
+        private string memoryTypeDetail;
+
+
         private float[] CPUUsageValues;
         private float[] singleCPUUsageValues;
+        private float[] memoryUsageValues;
+        private float[] singleMemoryUsageValues;
 
         public ProcessManagerForm()
         {
@@ -33,8 +44,10 @@ namespace INTROOS_Project
             this.cpuCounter.CategoryName = "Processor";
             this.cpuCounter.CounterName = "% Processor Time";
             this.cpuCounter.InstanceName = "_Total";
-            this.ramCounter = new PerformanceCounter("Memory", "Available MBytes"); 
+            this.availableRAMCounter = new PerformanceCounter("Memory", "Available MBytes");
             InitializeComponent();
+            //Console.WriteLine(this.GetComponent("Win32_PhysicalMemory", "TypeDetail"));
+
         }
 
         #region Event Handlers
@@ -42,7 +55,9 @@ namespace INTROOS_Project
         private void ProcessManagerForm_Load(object sender, EventArgs e)
         {
             loadProcessorInformation();
+            loadMemoryInformation();
             initializeCPUChart();
+            initializeMemoryChart();
             initializeSingleProcessCPUChart();
             loadProcessList();
         }
@@ -60,6 +75,7 @@ namespace INTROOS_Project
             processListGridView.FirstDisplayedScrollingColumnIndex = currentColumn;
 
             updateCPUChart();
+            updateMemoryChart();
             updateSingleProcessCPUChart();
         }
 
@@ -214,6 +230,99 @@ namespace INTROOS_Project
             return str;
         }
 
+        private void loadMemoryInformation()
+        {
+            this.memoryManufacturer = this.GetComponent("Win32_PhysicalMemory", "Manufacturer");
+            this.memoryCapacity = this.GetComponent("Win32_PhysicalMemory", "Capacity");
+            this.memoryCapacity = (Convert.ToInt64(this.memoryCapacity) / 1073741824).ToString();
+            this.memoryMemoryType = this.GetComponent("Win32_PhysicalMemory", "MemoryType");
+            switch (this.memoryMemoryType)
+            {
+                case "0": this.memoryMemoryType = "Unknown"; break;
+                case "1": this.memoryMemoryType = "Other"; break;
+                case "2": this.memoryMemoryType = "DRAM"; break;
+                case "3": this.memoryMemoryType = "Synchronous DRAM"; break;
+                case "4": this.memoryMemoryType = "Cache DRAM"; break;
+                case "5": this.memoryMemoryType = "EDO"; break;
+                case "6": this.memoryMemoryType = "EDRAM"; break;
+                case "7": this.memoryMemoryType = "VRAM"; break;
+                case "8": this.memoryMemoryType = "SRAM"; break;
+                case "9": this.memoryMemoryType = "RAM"; break;
+                case "10": this.memoryMemoryType = "ROM"; break;
+                case "11": this.memoryMemoryType = "Flash"; break;
+                case "12": this.memoryMemoryType = "EEPROM"; break;
+                case "13": this.memoryMemoryType = "FEPROM"; break;
+                case "14": this.memoryMemoryType = "EPROM"; break;
+                case "15": this.memoryMemoryType = "CDRAM"; break;
+                case "16": this.memoryMemoryType = "3DRAM"; break;
+                case "17": this.memoryMemoryType = "SDRAM"; break;
+                case "18": this.memoryMemoryType = "SGRAM"; break;
+                case "19": this.memoryMemoryType = "RDRAM"; break;
+                case "20": this.memoryMemoryType = "DDR"; break;
+                case "21": this.memoryMemoryType = "DDR2"; break;
+                case "22": this.memoryMemoryType = "DDR2"; break;
+                case "23": this.memoryMemoryType = "DDR2 FB-DIMM"; break;
+                case "24": this.memoryMemoryType = "DDR3"; break;
+                case "25": this.memoryMemoryType = "FBD2"; break;
+                default: break;
+            }
+            this.memoryDescription = this.GetComponent("Win32_PhysicalMemory", "Description");
+            this.memoryConfiguredClockSpeed = this.GetComponent("Win32_PhysicalMemory", "ConfiguredClockSpeed") + "MHz";
+            this.memoryFormFactor = this.GetComponent("Win32_PhysicalMemory", "FormFactor");
+            switch (this.memoryFormFactor)
+            {
+                case "0": this.memoryFormFactor = "Unknown"; break;
+                case "1": this.memoryFormFactor = "Other"; break;
+                case "2": this.memoryFormFactor = "SIP"; break;
+                case "3": this.memoryFormFactor = "DIP"; break;
+                case "4": this.memoryFormFactor = "ZIP"; break;
+                case "5": this.memoryFormFactor = "SOJ"; break;
+                case "6": this.memoryFormFactor = "Proprietary"; break;
+                case "7": this.memoryFormFactor = "SIMM"; break;
+                case "8": this.memoryFormFactor = "DIMM"; break;
+                case "9": this.memoryFormFactor = "TSOP"; break;
+                case "10": this.memoryFormFactor = "PGA"; break;
+                case "11": this.memoryFormFactor = "RIMM"; break;
+                case "12": this.memoryFormFactor = "SODIMM"; break;
+                case "13": this.memoryFormFactor = "SRIMM"; break;
+                case "14": this.memoryFormFactor = "SMD"; break;
+                case "15": this.memoryFormFactor = "SSMP"; break;
+                case "16": this.memoryFormFactor = "QFP"; break;
+                case "17": this.memoryFormFactor = "TQFP"; break;
+                case "18": this.memoryFormFactor = "SOIC"; break;
+                case "19": this.memoryFormFactor = "LCC"; break;
+                case "20": this.memoryFormFactor = "PLCC"; break;
+                case "21": this.memoryFormFactor = "BGA"; break;
+                case "22": this.memoryFormFactor = "FPBGA"; break;
+                case "23": this.memoryFormFactor = "LGA"; break;
+                default: break;
+            }
+            this.memoryTypeDetail = this.GetComponent("Win32_PhysicalMemory", "TypeDetail");
+            switch (this.memoryTypeDetail)
+            {
+                case "1": this.memoryTypeDetail = "Reserved"; break;
+                case "2": this.memoryTypeDetail = "Other"; break;
+                case "4": this.memoryTypeDetail = "Unknown"; break;
+                case "8": this.memoryTypeDetail = "Fast-paged"; break;
+                case "16": this.memoryTypeDetail = "Static column"; break;
+                case "32": this.memoryTypeDetail = "Pseudo-static"; break;
+                case "64": this.memoryTypeDetail = "RAMBUS"; break;
+                case "128": this.memoryTypeDetail = "Synchronous"; break;
+                case "256": this.memoryTypeDetail = "CMOS"; break;
+                case "512": this.memoryTypeDetail = "EDO"; break;
+                case "1024": this.memoryTypeDetail = "Window DRAM"; break;
+                case "2048": this.memoryTypeDetail = "Cache DRAM"; break;
+                case "4096": this.memoryTypeDetail = "Nonvolatile"; break;
+                default: break;
+            }
+
+            memoryNameLbl.Text = this.memoryManufacturer + " " + this.memoryCapacity + "GB" + " " + this.memoryMemoryType;
+            memoryDescriptionLbl.Text = this.memoryDescription;
+            memoryTypeDetailLbl.Text = this.memoryTypeDetail;
+            memorySpeedLbl.Text = this.memoryConfiguredClockSpeed;
+            memoryFormFactLbl.Text = this.memoryFormFactor;
+        }
+
         #endregion
 
         #region Chart Functions
@@ -264,6 +373,67 @@ namespace INTROOS_Project
             {
                 CPUChart.Series[0].Points.AddXY(i, this.CPUUsageValues[i]);
                 CPUChart.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            }
+        }
+
+        private void initializeMemoryChart()
+        {
+            this.memoryUsageValues = new float[50];
+            for (int i = 0; i < 50; i++)
+            {
+                this.memoryUsageValues[i] = 0;
+            }
+            memoryChart.ChartAreas[0].AxisX.Minimum = 0;
+            memoryChart.ChartAreas[0].AxisX.Maximum = 50;
+            memoryChart.ChartAreas[0].AxisY.Minimum = 0;
+            memoryChart.ChartAreas[0].AxisY.Maximum = Convert.ToInt64(this.memoryCapacity);
+            memoryChart.ChartAreas[0].AxisY.ScaleView.Zoom(0, Convert.ToInt64(this.memoryCapacity)); 
+            memoryChart.ChartAreas[0].AxisX.ScaleView.Zoom(1, 50); 
+            memoryChart.ChartAreas[0].CursorX.IsUserEnabled = true;
+            memoryChart.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
+            memoryChart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+            memoryChart.ChartAreas[0].AxisX.LabelStyle.Enabled = false;
+            memoryChart.Series[0].IsVisibleInLegend = false;
+        }
+
+        private void updateMemoryChart()
+        {
+            float[] temp = new float[50];
+            float availableMemory;
+            float totalMemory;
+
+            foreach (var series in memoryChart.Series)
+            {
+                series.Points.Clear();
+            }
+
+            availableMemory = this.availableRAMCounter.NextValue() / 1024;
+            if (availableMemory.ToString("n2").Length < 5) memAvailableLbl.Text = availableMemory.ToString("n3");
+            else memAvailableLbl.Text = availableMemory.ToString("n2");
+
+            totalMemory = (float)new Microsoft.VisualBasic.Devices.ComputerInfo().TotalPhysicalMemory / 1024 / 1024 / 1024;
+            if (totalMemory.ToString("n2").Length < 5) totalMemoryLbl.Text = totalMemory.ToString("n3");
+            else totalMemoryLbl.Text = totalMemory.ToString("n2");
+
+            temp[49] = totalMemory - availableMemory;
+            if (temp[49].ToString("n2").Length < 5) memoryInUseLbl.Text = temp[49].ToString("n3");
+            else memoryInUseLbl.Text = temp[49].ToString("n2");
+            
+
+            for (int i = 0; i < 49; i++)
+            {
+                temp[i] = this.memoryUsageValues[i + 1];
+            }
+
+            for (int i = 0; i < 50; i++)
+            {
+                this.memoryUsageValues[i] = temp[i];
+            }
+
+            for (int i = 0; i < 50; i++)
+            {
+                memoryChart.Series[0].Points.AddXY(i, this.memoryUsageValues[i]);
+                memoryChart.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             }
         }
 
@@ -319,6 +489,68 @@ namespace INTROOS_Project
             }
         }
 
+        /*
+        private void initializeSingleMemoryChart()
+        {
+            this.singleMemoryUsageValues = new float[50];
+            for (int i = 0; i < 50; i++)
+            {
+                this.singleMemoryUsageValues[i] = 0;
+            }
+            singleProcessMemChart.ChartAreas[0].AxisX.Minimum = 0;
+            singleProcessMemChart.ChartAreas[0].AxisX.Maximum = 50;
+            singleProcessMemChart.ChartAreas[0].AxisY.Minimum = 0;
+            singleProcessMemChart.ChartAreas[0].AxisY.Maximum = 100;
+            singleProcessMemChart.ChartAreas[0].AxisY.ScaleView.Zoom(0, 100); // -15<= y <=15
+            singleProcessMemChart.ChartAreas[0].AxisX.ScaleView.Zoom(1, 50); // -15 <= x <= 2
+            singleProcessMemChart.ChartAreas[0].CursorX.IsUserEnabled = true;
+            singleProcessMemChart.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
+            singleProcessMemChart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+            singleProcessMemChart.ChartAreas[0].AxisX.LabelStyle.Enabled = false;
+            singleProcessMemChart.Series[0].IsVisibleInLegend = false;
+        }
+
+        private void updateSingleMemoryChart()
+        {
+            float[] temp = new float[50];
+            float availableMemory;
+            float totalMemory;
+
+            foreach (var series in memoryChart.Series)
+            {
+                series.Points.Clear();
+            }
+
+            availableMemory = this.availableRAMCounter.NextValue() / 1024;
+            if (availableMemory.ToString("n2").Length < 5) memAvailableLbl.Text = availableMemory.ToString("n3");
+            else memAvailableLbl.Text = availableMemory.ToString("n2");
+
+            totalMemory = (float)new Microsoft.VisualBasic.Devices.ComputerInfo().TotalPhysicalMemory / 1024 / 1024 / 1024;
+            if (totalMemory.ToString("n2").Length < 5) totalMemoryLbl.Text = totalMemory.ToString("n3");
+            else totalMemoryLbl.Text = totalMemory.ToString("n2");
+
+            temp[49] = totalMemory - availableMemory;
+            if (temp[49].ToString("n2").Length < 5) memoryInUseLbl.Text = temp[49].ToString("n3");
+            else memoryInUseLbl.Text = temp[49].ToString("n2");
+
+
+            for (int i = 0; i < 49; i++)
+            {
+                temp[i] = this.memoryUsageValues[i + 1];
+            }
+
+            for (int i = 0; i < 50; i++)
+            {
+                this.memoryUsageValues[i] = temp[i];
+            }
+
+            for (int i = 0; i < 50; i++)
+            {
+                memoryChart.Series[0].Points.AddXY(i, this.memoryUsageValues[i]);
+                memoryChart.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            }
+        }
+        */
         #endregion
     }
 }
