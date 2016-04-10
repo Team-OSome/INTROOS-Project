@@ -18,6 +18,7 @@ namespace INTROOS_Project
         private PerformanceCounter processMemory;
         private PerformanceCounter cpuCounter;
         private PerformanceCounter availableRAMCounter;
+        private PerformanceCounter diskUsage;
 
         private string processorName;
         private string processorDescription;
@@ -33,6 +34,9 @@ namespace INTROOS_Project
         private string memoryFormFactor;
         private string memoryTypeDetail;
 
+        private string diskModel;
+        private string diskSize;
+        private string diskDescription;
 
         private float[] CPUUsageValues;
         private float[] singleCPUUsageValues;
@@ -46,9 +50,10 @@ namespace INTROOS_Project
             this.cpuCounter.CounterName = "% Processor Time";
             this.cpuCounter.InstanceName = "_Total";
             this.availableRAMCounter = new PerformanceCounter("Memory", "Available MBytes");
+            this.diskUsage = new PerformanceCounter("PhysicalDisk", "% Disk Time", "_Total");
             InitializeComponent();
-            refreshTimer.Enabled = false;   
-            //Console.WriteLine(this.GetComponent("Win32_PhysicalMemory", "TypeDetail"));
+            refreshTimer.Enabled = false;
+            Console.WriteLine(this.GetComponent("Win32_DiskDrive", "Name"));
 
         }
 
@@ -69,7 +74,7 @@ namespace INTROOS_Project
 
         private void refreshTimer_Tick(object sender, EventArgs e)
         {
-            Console.WriteLine("Refresh");
+            //Console.WriteLine("Refresh");
             int currentRow = processListGridView.FirstDisplayedScrollingRowIndex;
             int currentColumn = processListGridView.FirstDisplayedScrollingColumnIndex;
             int currentCell = processListGridView.CurrentCell.RowIndex;
@@ -84,6 +89,8 @@ namespace INTROOS_Project
             updateMemoryChart();
             updateSingleProcessCPUChart();
             updateSingleMemoryChart();
+
+            Console.WriteLine(this.diskUsage.NextValue());
         }
 
 
