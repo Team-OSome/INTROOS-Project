@@ -42,6 +42,9 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.refreshTimer = new System.Windows.Forms.Timer(this.components);
             this.MemoryTab = new System.Windows.Forms.TabPage();
@@ -77,6 +80,8 @@
             this.CPUChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.ProcessesTab = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.memoryUsageLbl = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.processTabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -92,8 +97,22 @@
             this.stopBtn = new System.Windows.Forms.Button();
             this.startBtn = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.label8 = new System.Windows.Forms.Label();
-            this.memoryUsageLbl = new System.Windows.Forms.Label();
+            this.diskTab = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
+            this.diskReadLbl = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.diskTimeLbl = new System.Windows.Forms.Label();
+            this.diskSizeLbl = new System.Windows.Forms.Label();
+            this.diskInterfaceTypeLbl = new System.Windows.Forms.Label();
+            this.diskPartitionsLbl = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.diskWriteLbl = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.diskDescriptionLbl = new System.Windows.Forms.Label();
+            this.diskNameLbl = new System.Windows.Forms.Label();
+            this.diskChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.MemoryTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.memoryChart)).BeginInit();
             this.CPUTab.SuspendLayout();
@@ -107,6 +126,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.singleProcessMemChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.processListGridView)).BeginInit();
             this.tabControl.SuspendLayout();
+            this.diskTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.diskChart)).BeginInit();
             this.SuspendLayout();
             // 
             // imageList
@@ -117,6 +138,7 @@
             this.imageList.Images.SetKeyName(1, "RAM_PNG.png");
             this.imageList.Images.SetKeyName(2, "CPU_PNG.png");
             this.imageList.Images.SetKeyName(3, "PROCESS_PNG.png");
+            this.imageList.Images.SetKeyName(4, "DISK_PSD.png");
             // 
             // refreshTimer
             // 
@@ -150,7 +172,7 @@
             this.MemoryTab.Name = "MemoryTab";
             this.MemoryTab.Padding = new System.Windows.Forms.Padding(3);
             this.MemoryTab.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.MemoryTab.Size = new System.Drawing.Size(834, 499);
+            this.MemoryTab.Size = new System.Drawing.Size(834, 618);
             this.MemoryTab.TabIndex = 2;
             // 
             // label7
@@ -332,7 +354,7 @@
             // 
             // memoryChart
             // 
-            this.memoryChart.BackColor = System.Drawing.Color.Transparent;
+            this.memoryChart.BackColor = System.Drawing.Color.WhiteSmoke;
             chartArea1.BackColor = System.Drawing.Color.Transparent;
             chartArea1.Name = "ChartArea1";
             this.memoryChart.ChartAreas.Add(chartArea1);
@@ -340,19 +362,20 @@
             this.memoryChart.Legends.Add(legend1);
             this.memoryChart.Location = new System.Drawing.Point(6, 178);
             this.memoryChart.Name = "memoryChart";
-            series1.BorderColor = System.Drawing.Color.DodgerBlue;
+            series1.BorderColor = System.Drawing.Color.MediumBlue;
             series1.BorderWidth = 3;
             series1.ChartArea = "ChartArea1";
-            series1.Color = System.Drawing.Color.DodgerBlue;
+            series1.Color = System.Drawing.Color.MediumBlue;
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.memoryChart.Series.Add(series1);
-            this.memoryChart.Size = new System.Drawing.Size(820, 316);
+            this.memoryChart.Size = new System.Drawing.Size(820, 432);
             this.memoryChart.TabIndex = 11;
             this.memoryChart.Text = "chart1";
             // 
             // CPUTab
             // 
+            this.CPUTab.BackColor = System.Drawing.Color.WhiteSmoke;
             this.CPUTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.CPUTab.Controls.Add(this.procNumOfCoresLbl);
             this.CPUTab.Controls.Add(this.procMaxClockSpeedLbl);
@@ -369,7 +392,7 @@
             this.CPUTab.Location = new System.Drawing.Point(154, 4);
             this.CPUTab.Name = "CPUTab";
             this.CPUTab.Padding = new System.Windows.Forms.Padding(3);
-            this.CPUTab.Size = new System.Drawing.Size(834, 499);
+            this.CPUTab.Size = new System.Drawing.Size(834, 618);
             this.CPUTab.TabIndex = 1;
             // 
             // procNumOfCoresLbl
@@ -493,13 +516,13 @@
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             this.CPUChart.Series.Add(series2);
-            this.CPUChart.Size = new System.Drawing.Size(820, 316);
+            this.CPUChart.Size = new System.Drawing.Size(820, 432);
             this.CPUChart.TabIndex = 0;
             this.CPUChart.Text = "chart1";
             // 
             // ProcessesTab
             // 
-            this.ProcessesTab.BackColor = System.Drawing.Color.Transparent;
+            this.ProcessesTab.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ProcessesTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ProcessesTab.Controls.Add(this.groupBox1);
             this.ProcessesTab.Controls.Add(this.label2);
@@ -513,7 +536,7 @@
             this.ProcessesTab.Location = new System.Drawing.Point(154, 4);
             this.ProcessesTab.Name = "ProcessesTab";
             this.ProcessesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ProcessesTab.Size = new System.Drawing.Size(834, 499);
+            this.ProcessesTab.Size = new System.Drawing.Size(834, 618);
             this.ProcessesTab.TabIndex = 0;
             // 
             // groupBox1
@@ -530,6 +553,23 @@
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " Properties ";
+            // 
+            // memoryUsageLbl
+            // 
+            this.memoryUsageLbl.AutoSize = true;
+            this.memoryUsageLbl.Location = new System.Drawing.Point(93, 83);
+            this.memoryUsageLbl.Name = "memoryUsageLbl";
+            this.memoryUsageLbl.Size = new System.Drawing.Size(0, 13);
+            this.memoryUsageLbl.TabIndex = 6;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 83);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(81, 13);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "Memory Usage:";
             // 
             // label6
             // 
@@ -601,10 +641,10 @@
             this.singleProcessMemChart.Legends.Add(legend4);
             this.singleProcessMemChart.Location = new System.Drawing.Point(3, 4);
             this.singleProcessMemChart.Name = "singleProcessMemChart";
-            series4.BorderColor = System.Drawing.Color.DodgerBlue;
+            series4.BorderColor = System.Drawing.Color.MediumBlue;
             series4.BorderWidth = 3;
             series4.ChartArea = "ChartArea1";
-            series4.Color = System.Drawing.Color.DodgerBlue;
+            series4.Color = System.Drawing.Color.MediumBlue;
             series4.Legend = "Legend1";
             series4.Name = "Series1";
             this.singleProcessMemChart.Series.Add(series4);
@@ -654,12 +694,12 @@
             this.processListGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.processListGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.processListGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.processListGridView.Location = new System.Drawing.Point(15, 205);
+            this.processListGridView.Location = new System.Drawing.Point(11, 201);
             this.processListGridView.Name = "processListGridView";
             this.processListGridView.ReadOnly = true;
             this.processListGridView.RowHeadersVisible = false;
             this.processListGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.processListGridView.Size = new System.Drawing.Size(798, 272);
+            this.processListGridView.Size = new System.Drawing.Size(798, 409);
             this.processListGridView.TabIndex = 11;
             // 
             // processTxt
@@ -694,6 +734,7 @@
             this.tabControl.Alignment = System.Windows.Forms.TabAlignment.Left;
             this.tabControl.Controls.Add(this.ProcessesTab);
             this.tabControl.Controls.Add(this.CPUTab);
+            this.tabControl.Controls.Add(this.diskTab);
             this.tabControl.Controls.Add(this.MemoryTab);
             this.tabControl.ImageList = this.imageList;
             this.tabControl.ItemSize = new System.Drawing.Size(150, 150);
@@ -701,32 +742,212 @@
             this.tabControl.Multiline = true;
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(992, 507);
+            this.tabControl.Size = new System.Drawing.Size(992, 626);
             this.tabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl.TabIndex = 0;
             // 
-            // label8
+            // diskTab
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 83);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(81, 13);
-            this.label8.TabIndex = 5;
-            this.label8.Text = "Memory Usage:";
+            this.diskTab.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.diskTab.Controls.Add(this.label10);
+            this.diskTab.Controls.Add(this.diskReadLbl);
+            this.diskTab.Controls.Add(this.label12);
+            this.diskTab.Controls.Add(this.diskTimeLbl);
+            this.diskTab.Controls.Add(this.diskSizeLbl);
+            this.diskTab.Controls.Add(this.diskInterfaceTypeLbl);
+            this.diskTab.Controls.Add(this.diskPartitionsLbl);
+            this.diskTab.Controls.Add(this.label17);
+            this.diskTab.Controls.Add(this.diskWriteLbl);
+            this.diskTab.Controls.Add(this.label19);
+            this.diskTab.Controls.Add(this.label20);
+            this.diskTab.Controls.Add(this.label21);
+            this.diskTab.Controls.Add(this.diskDescriptionLbl);
+            this.diskTab.Controls.Add(this.diskNameLbl);
+            this.diskTab.Controls.Add(this.diskChart);
+            this.diskTab.ImageKey = "DISK_PSD.png";
+            this.diskTab.Location = new System.Drawing.Point(154, 4);
+            this.diskTab.Name = "diskTab";
+            this.diskTab.Padding = new System.Windows.Forms.Padding(3);
+            this.diskTab.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.diskTab.Size = new System.Drawing.Size(834, 618);
+            this.diskTab.TabIndex = 3;
             // 
-            // memoryUsageLbl
+            // label10
             // 
-            this.memoryUsageLbl.AutoSize = true;
-            this.memoryUsageLbl.Location = new System.Drawing.Point(93, 83);
-            this.memoryUsageLbl.Name = "memoryUsageLbl";
-            this.memoryUsageLbl.Size = new System.Drawing.Size(0, 13);
-            this.memoryUsageLbl.TabIndex = 6;
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(535, 158);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(73, 17);
+            this.label10.TabIndex = 43;
+            this.label10.Text = "Disk Read";
+            // 
+            // diskReadLbl
+            // 
+            this.diskReadLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.diskReadLbl.AutoSize = true;
+            this.diskReadLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.diskReadLbl.Location = new System.Drawing.Point(496, 126);
+            this.diskReadLbl.Name = "diskReadLbl";
+            this.diskReadLbl.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.diskReadLbl.Size = new System.Drawing.Size(162, 36);
+            this.diskReadLbl.TabIndex = 42;
+            this.diskReadLbl.Text = "16.00 KB/s";
+            this.diskReadLbl.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(705, 94);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(86, 17);
+            this.label12.TabIndex = 41;
+            this.label12.Text = "% Disk Time";
+            // 
+            // diskTimeLbl
+            // 
+            this.diskTimeLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.diskTimeLbl.AutoSize = true;
+            this.diskTimeLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.diskTimeLbl.Location = new System.Drawing.Point(679, 53);
+            this.diskTimeLbl.Name = "diskTimeLbl";
+            this.diskTimeLbl.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.diskTimeLbl.Size = new System.Drawing.Size(154, 46);
+            this.diskTimeLbl.TabIndex = 40;
+            this.diskTimeLbl.Text = "99.99%";
+            this.diskTimeLbl.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // diskSizeLbl
+            // 
+            this.diskSizeLbl.AutoSize = true;
+            this.diskSizeLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.diskSizeLbl.Location = new System.Drawing.Point(91, 84);
+            this.diskSizeLbl.Name = "diskSizeLbl";
+            this.diskSizeLbl.Size = new System.Drawing.Size(35, 20);
+            this.diskSizeLbl.TabIndex = 39;
+            this.diskSizeLbl.Text = "asd";
+            // 
+            // diskInterfaceTypeLbl
+            // 
+            this.diskInterfaceTypeLbl.AutoSize = true;
+            this.diskInterfaceTypeLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.diskInterfaceTypeLbl.Location = new System.Drawing.Point(120, 142);
+            this.diskInterfaceTypeLbl.Name = "diskInterfaceTypeLbl";
+            this.diskInterfaceTypeLbl.Size = new System.Drawing.Size(35, 20);
+            this.diskInterfaceTypeLbl.TabIndex = 38;
+            this.diskInterfaceTypeLbl.Text = "asd";
+            // 
+            // diskPartitionsLbl
+            // 
+            this.diskPartitionsLbl.AutoSize = true;
+            this.diskPartitionsLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.diskPartitionsLbl.Location = new System.Drawing.Point(134, 113);
+            this.diskPartitionsLbl.Name = "diskPartitionsLbl";
+            this.diskPartitionsLbl.Size = new System.Drawing.Size(35, 20);
+            this.diskPartitionsLbl.TabIndex = 37;
+            this.diskPartitionsLbl.Text = "asd";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(710, 158);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(72, 17);
+            this.label17.TabIndex = 36;
+            this.label17.Text = "Disk Write";
+            // 
+            // diskWriteLbl
+            // 
+            this.diskWriteLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.diskWriteLbl.AutoSize = true;
+            this.diskWriteLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.diskWriteLbl.Location = new System.Drawing.Point(664, 126);
+            this.diskWriteLbl.Name = "diskWriteLbl";
+            this.diskWriteLbl.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.diskWriteLbl.Size = new System.Drawing.Size(162, 36);
+            this.diskWriteLbl.TabIndex = 35;
+            this.diskWriteLbl.Text = "16.00 KB/s";
+            this.diskWriteLbl.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(11, 87);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(74, 17);
+            this.label19.TabIndex = 34;
+            this.label19.Text = "Disk Size: ";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(11, 145);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(103, 17);
+            this.label20.TabIndex = 33;
+            this.label20.Text = "Interface Type:";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(11, 116);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(117, 17);
+            this.label21.TabIndex = 32;
+            this.label21.Text = "No. of Partitions: ";
+            // 
+            // diskDescriptionLbl
+            // 
+            this.diskDescriptionLbl.AutoSize = true;
+            this.diskDescriptionLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.diskDescriptionLbl.Location = new System.Drawing.Point(10, 54);
+            this.diskDescriptionLbl.Name = "diskDescriptionLbl";
+            this.diskDescriptionLbl.Size = new System.Drawing.Size(86, 20);
+            this.diskDescriptionLbl.TabIndex = 31;
+            this.diskDescriptionLbl.Text = "description";
+            // 
+            // diskNameLbl
+            // 
+            this.diskNameLbl.AutoSize = true;
+            this.diskNameLbl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.diskNameLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.diskNameLbl.Location = new System.Drawing.Point(8, 11);
+            this.diskNameLbl.Name = "diskNameLbl";
+            this.diskNameLbl.Size = new System.Drawing.Size(152, 31);
+            this.diskNameLbl.TabIndex = 30;
+            this.diskNameLbl.Text = "sample text";
+            // 
+            // diskChart
+            // 
+            this.diskChart.BackColor = System.Drawing.Color.Transparent;
+            chartArea5.BackColor = System.Drawing.Color.Transparent;
+            chartArea5.Name = "ChartArea1";
+            this.diskChart.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.diskChart.Legends.Add(legend5);
+            this.diskChart.Location = new System.Drawing.Point(7, 179);
+            this.diskChart.Name = "diskChart";
+            series5.BorderColor = System.Drawing.Color.DarkRed;
+            series5.BorderWidth = 3;
+            series5.ChartArea = "ChartArea1";
+            series5.Color = System.Drawing.Color.DarkRed;
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            this.diskChart.Series.Add(series5);
+            this.diskChart.Size = new System.Drawing.Size(820, 432);
+            this.diskChart.TabIndex = 29;
+            this.diskChart.Text = "chart1";
             // 
             // ProcessManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1016, 531);
+            this.ClientSize = new System.Drawing.Size(1016, 650);
             this.Controls.Add(this.tabControl);
             this.Name = "ProcessManagerForm";
             this.Text = "ProcessManagerForm";
@@ -748,6 +969,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.singleProcessMemChart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.processListGridView)).EndInit();
             this.tabControl.ResumeLayout(false);
+            this.diskTab.ResumeLayout(false);
+            this.diskTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.diskChart)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -806,5 +1030,21 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label memoryUsageLbl;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TabPage diskTab;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label diskReadLbl;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label diskTimeLbl;
+        private System.Windows.Forms.Label diskSizeLbl;
+        private System.Windows.Forms.Label diskInterfaceTypeLbl;
+        private System.Windows.Forms.Label diskPartitionsLbl;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label diskWriteLbl;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label diskDescriptionLbl;
+        private System.Windows.Forms.Label diskNameLbl;
+        private System.Windows.Forms.DataVisualization.Charting.Chart diskChart;
     }
 }

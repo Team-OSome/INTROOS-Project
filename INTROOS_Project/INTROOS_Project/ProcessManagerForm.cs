@@ -19,6 +19,8 @@ namespace INTROOS_Project
         private PerformanceCounter cpuCounter;
         private PerformanceCounter availableRAMCounter;
         private PerformanceCounter diskUsage;
+        private PerformanceCounter diskRead;
+        private PerformanceCounter diskWrite;
 
         private string processorName;
         private string processorDescription;
@@ -37,11 +39,14 @@ namespace INTROOS_Project
         private string diskModel;
         private string diskSize;
         private string diskDescription;
+        private string diskPartitions;
+        private string diskInterfaceType;
 
         private float[] CPUUsageValues;
         private float[] singleCPUUsageValues;
         private float[] memoryUsageValues;
         private float[] singleMemoryUsageValues;
+        private float[] diskUsageValues;
 
         public ProcessManagerForm()
         {
@@ -51,9 +56,12 @@ namespace INTROOS_Project
             this.cpuCounter.InstanceName = "_Total";
             this.availableRAMCounter = new PerformanceCounter("Memory", "Available MBytes");
             this.diskUsage = new PerformanceCounter("PhysicalDisk", "% Disk Time", "_Total");
+            this.diskRead = new PerformanceCounter("PhysicalDisk", "Disk Read Bytes/sec", "_Total");
+            this.diskWrite = new PerformanceCounter("PhysicalDisk", "Disk Write Bytes/sec", "_Total");
+
             InitializeComponent();
             refreshTimer.Enabled = false;
-            Console.WriteLine(this.GetComponent("Win32_DiskDrive", "Name"));
+            Console.WriteLine(this.GetComponent("Win32_DiskDrive", "InterfaceType"));
 
         }
 
@@ -63,10 +71,15 @@ namespace INTROOS_Project
         {
             loadProcessorInformation();
             loadMemoryInformation();
+            loadDiskInformation();
+
             initializeCPUChart();
             initializeMemoryChart();
+            initializeDiskChart();
+
             initializeSingleProcessCPUChart();
             initializeSingleMemoryChart();
+
             loadProcessList();
             Console.WriteLine("Done Loading");
             refreshTimer.Enabled = true ;  
@@ -87,10 +100,12 @@ namespace INTROOS_Project
 
             updateCPUChart();
             updateMemoryChart();
+            updateDiskChart();
+
             updateSingleProcessCPUChart();
             updateSingleMemoryChart();
 
-            Console.WriteLine(this.diskUsage.NextValue());
+            //Console.WriteLine(this.diskUsage.NextValue());
         }
 
 
@@ -350,6 +365,21 @@ namespace INTROOS_Project
             memoryFormFactLbl.Text = this.memoryFormFactor;
         }
 
+        private void loadDiskInformation()
+        {
+            this.diskModel = this.GetComponent("Win32_DiskDrive", "Model");
+            this.diskDescription = this.GetComponent("Win32_DiskDrive", "MediaType");
+            this.diskSize = (Convert.ToInt64(this.GetComponent("Win32_DiskDrive", "Size")) * 1.0 / 1024 / 1024 / 1024).ToString("n2");
+            this.diskPartitions = this.GetComponent("Win32_DiskDrive", "Partitions");
+            this.diskInterfaceType = this.GetComponent("Win32_DiskDrive", "InterfaceType");
+
+            diskNameLbl.Text = this.diskModel;
+            diskDescriptionLbl.Text = this.diskDescription; 
+            diskSizeLbl.Text = this.diskSize + " GB";
+            diskPartitionsLbl.Text = this.diskPartitions;
+            diskInterfaceTypeLbl.Text = this.diskInterfaceType;
+        }
+
         #endregion
 
         #region Chart Functions
@@ -461,6 +491,70 @@ namespace INTROOS_Project
             {
                 memoryChart.Series[0].Points.AddXY(i, this.memoryUsageValues[i]);
                 memoryChart.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            }
+        }
+
+        private void initializeDiskChart()
+        {
+            this.diskUsageValues = new float[50];
+            for (int i = 0; i < 50; i++)
+            {
+                this.diskUsageValues[i] = 0;
+            }
+            diskChart.ChartAreas[0].AxisX.Minimum = 0;
+            diskChart.ChartAreas[0].AxisX.Maximum = 50;
+            diskChart.ChartAreas[0].AxisY.Minimum = 0;
+            diskChart.ChartAreas[0].AxisY.Maximum = 100;
+            diskChart.ChartAreas[0].AxisY.ScaleView.Zoom(0, 100);
+            diskChart.ChartAreas[0].AxisX.ScaleView.Zoom(1, 50);
+            diskChart.ChartAreas[0].CursorX.IsUserEnabled = true;
+            diskChart.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
+            diskChart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+            diskChart.ChartAreas[0].AxisX.LabelStyle.Enabled = false;
+            diskChart.Series[0].IsVisibleInLegend = false;
+        }
+
+        private void updateDiskChart()
+        {
+            float[] temp = new float[50];
+            float read;
+            float write;
+
+            foreach (var series in diskChart.Series)
+            {
+                series.Points.Clear();
+            }
+
+            temp[49] = this.diskUsage.NextValue();
+            if (temp[49].ToString("n2").Length < 5) diskTimeLbl.Text = temp[49].ToString("n3") + "%";
+            else diskTimeLbl.Text = temp[49].ToString("n2") + "%";
+
+            read = this.diskRead.NextValue() / 1024;
+            if (read.ToString("n2").Length == 5) diskReadLbl.Text = read.ToString("n1") + " KB/s";
+            else if (read.ToString("n2").Length < 5) diskReadLbl.Text = read.ToString("n2") + " KB/s";
+            else diskReadLbl.Text = read.ToString("n2") + " KB/s";
+
+            write = this.diskWrite.NextValue() / 1024;
+            if (write.ToString("n2").Length >= 6) diskWriteLbl.Text = write.ToString("n1") + " KB/s";
+            else if (write.ToString("n2").Length == 5) diskWriteLbl.Text = write.ToString("n2") + " KB/s";
+            else if (write.ToString("n2").Length == 4) diskWriteLbl.Text = write.ToString("n3") + " KB/s";
+            else if (write.ToString("n2").Length <= 3) diskWriteLbl.Text = write.ToString("n4") + " KB/s";
+            else diskWriteLbl.Text = write.ToString("n2") + " KB/s";
+
+            for (int i = 0; i < 49; i++)
+            {
+                temp[i] = this.diskUsageValues[i + 1];
+            }
+
+            for (int i = 0; i < 50; i++)
+            {
+                this.diskUsageValues[i] = temp[i];
+            }
+
+            for (int i = 0; i < 50; i++)
+            {
+                diskChart.Series[0].Points.AddXY(i, this.diskUsageValues[i]);
+                diskChart.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             }
         }
 
