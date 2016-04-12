@@ -61,7 +61,8 @@ namespace INTROOS_Project
 
             InitializeComponent();
             refreshTimer.Enabled = false;
-            Console.WriteLine(this.GetComponent("Win32_DiskDrive", "InterfaceType"));
+            //Console.WriteLine(this.GetComponent("Win32_DiskDrive", "InterfaceType"));
+            //formatFloat(10);
 
         }
 
@@ -220,7 +221,17 @@ namespace INTROOS_Project
 
             return "0 Bytes";
         }
-
+        
+        public float formatFloat(float bytes)
+        {
+            float x = 1.0f;
+            if (Math.Floor(Math.Log10(bytes) + 1) == 0)
+            {
+                return bytes;
+            }
+            return x;
+        }
+        
         private void loadProcessorInformation()
         {
             Console.WriteLine("Loading " + "Processor Name");
@@ -526,20 +537,81 @@ namespace INTROOS_Project
             }
 
             temp[49] = this.diskUsage.NextValue();
+            if (temp[49] >= 100) temp[49] = 100;
             if (temp[49].ToString("n2").Length < 5) diskTimeLbl.Text = temp[49].ToString("n3") + "%";
             else diskTimeLbl.Text = temp[49].ToString("n2") + "%";
 
-            read = this.diskRead.NextValue() / 1024;
-            if (read.ToString("n2").Length == 5) diskReadLbl.Text = read.ToString("n1") + " KB/s";
-            else if (read.ToString("n2").Length < 5) diskReadLbl.Text = read.ToString("n2") + " KB/s";
-            else diskReadLbl.Text = read.ToString("n2") + " KB/s";
+            read = this.diskRead.NextValue();
+            if (read.ToString("n3").Length == 5) diskReadLbl.Text = read.ToString("n3") + "  B/s";
+            else if (read.ToString("n3").Length == 6) diskReadLbl.Text = read.ToString("n2") + "  B/s";
+            else if (read.ToString("n3").Length == 7) diskReadLbl.Text = read.ToString("n1") + "  B/s";
+            else if (read.ToString("n3").Length == 9)
+            {
+                read = read / 1024;
+                diskReadLbl.Text = read.ToString("n3") + " KB/s";
+            }
+            else if (read.ToString("n3").Length == 10)
+            {
+                read = read / 1024;
+                diskReadLbl.Text = read.ToString("n2") + " KB/s";
+            }
+            else if (read.ToString("n3").Length == 11)
+            {
+                read = read / 1024;
+                diskReadLbl.Text = read.ToString("n1") + " KB/s";
+            }
+            else if (read.ToString("n3").Length == 13)
+            {
+                read = read / 1024 / 1024;
+                diskReadLbl.Text = read.ToString("n3") + " MB/s";
+            }
+            else if (read.ToString("n3").Length == 14)
+            {
+                read = read / 1024 / 1024;
+                diskReadLbl.Text = read.ToString("n2") + " MB/s";
+            }
+            else if (read.ToString("n3").Length == 15)
+            {
+                read = read / 1024 / 1024;
+                diskReadLbl.Text = read.ToString("n1") + " MB/s";
+            }
+            else diskReadLbl.Text = read.ToString() + " B/s";
 
-            write = this.diskWrite.NextValue() / 1024;
-            if (write.ToString("n2").Length >= 6) diskWriteLbl.Text = write.ToString("n1") + " KB/s";
-            else if (write.ToString("n2").Length == 5) diskWriteLbl.Text = write.ToString("n2") + " KB/s";
-            else if (write.ToString("n2").Length == 4) diskWriteLbl.Text = write.ToString("n3") + " KB/s";
-            else if (write.ToString("n2").Length <= 3) diskWriteLbl.Text = write.ToString("n4") + " KB/s";
-            else diskWriteLbl.Text = write.ToString("n2") + " KB/s";
+            write = this.diskWrite.NextValue();
+            if (write.ToString("n3").Length == 5) diskWriteLbl.Text = write.ToString("n3") + "  B/s";
+            else if (write.ToString("n3").Length == 6) diskWriteLbl.Text = write.ToString("n2") + "  B/s";
+            else if (write.ToString("n3").Length == 7) diskWriteLbl.Text = write.ToString("n1") + "  B/s";
+            else if (write.ToString("n3").Length == 9)
+            {
+                write = write / 1024;
+                diskWriteLbl.Text = write.ToString("n3") + " KB/s";
+            }
+            else if (write.ToString("n3").Length == 10)
+            {
+                write = write / 1024;
+                diskWriteLbl.Text = write.ToString("n2") + " KB/s";
+            }
+            else if (write.ToString("n3").Length == 11)
+            {
+                write = write / 1024;
+                diskWriteLbl.Text = write.ToString("n1") + " KB/s";
+            }
+            else if (write.ToString("n3").Length == 13)
+            {
+                write = write / 1024 / 1024;
+                diskWriteLbl.Text = write.ToString("n3") + " MB/s";
+            }
+            else if (write.ToString("n3").Length == 14)
+            {
+                write = write / 1024 / 1024;
+                diskWriteLbl.Text = write.ToString("n2") + " MB/s";
+            }
+            else if (write.ToString("n3").Length == 15)
+            {
+                write = write / 1024 / 1024;
+                diskWriteLbl.Text = write.ToString("n1") + " MB/s";
+            }
+            else diskWriteLbl.Text = write.ToString() + " B/s";
 
             for (int i = 0; i < 49; i++)
             {
