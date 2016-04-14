@@ -660,7 +660,7 @@ namespace INTROOS_Project
             }
             if (pcProcess != null)
             {
-                temp[49] = this.pcProcess.NextValue();
+                temp[49] = this.pcProcess.NextValue() / Convert.ToInt32(this.processorNumberOfCores);
                 if (temp[49].ToString("n2").Length < 5) cpuUsageLbl.Text = temp[49].ToString("n3") + "%";
                 else cpuUsageLbl.Text = temp[49].ToString("n2") + "%";
             }
