@@ -52,9 +52,3 @@ C:\Users\User\Documents\GitHub\INTROOS-Project\INTROOS_Project\INTROOS_Project\o
 C:\Users\User\Documents\GitHub\INTROOS-Project\INTROOS_Project\INTROOS_Project\bin\Debug\INTROOS_Project.exe.manifest
 C:\Users\User\Documents\GitHub\INTROOS-Project\INTROOS_Project\INTROOS_Project\bin\Debug\INTROOS_Project.application
 C:\Users\User\Documents\GitHub\INTROOS-Project\INTROOS_Project\INTROOS_Project\obj\Debug\INTROOS_Project.application
-C:\Users\Nolan\Documents\GitHub\INTROOS-Project\INTROOS_Project\INTROOS_Project\obj\Debug\INTROOS_Project.csproj.ResolveComReference.cache
-C:\Users\Nolan\Documents\GitHub\INTROOS-Project\INTROOS_Project\INTROOS_Project\bin\Debug\INTROOS_Project.exe.manifest
-C:\Users\Nolan\Documents\GitHub\INTROOS-Project\INTROOS_Project\INTROOS_Project\bin\Debug\INTROOS_Project.application
-C:\Users\Nolan\Documents\GitHub\INTROOS-Project\INTROOS_Project\INTROOS_Project\obj\Debug\INTROOS_Project.ProcessManagerForm.resources
-C:\Users\Nolan\Documents\GitHub\INTROOS-Project\INTROOS_Project\INTROOS_Project\obj\Debug\INTROOS_Project.exe.manifest
-C:\Users\Nolan\Documents\GitHub\INTROOS-Project\INTROOS_Project\INTROOS_Project\obj\Debug\INTROOS_Project.application
