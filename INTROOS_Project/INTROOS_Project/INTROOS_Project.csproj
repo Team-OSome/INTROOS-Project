@@ -12,7 +12,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\User\Documents\GitHub\INTROOS-Project\Installer\</PublishUrl>
+    <PublishUrl>C:\Users\Nolan\Documents\GitHub\INTROOS-Project\Installer\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -49,10 +49,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>376264F5705C1E7E88E74ED60DF03761657C8BDA</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>0C5B9CA24211999D1D6FCF04342B3C77F1F1A343</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>INTROOS_Project_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>INTROOS_Project_2_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -105,6 +105,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="INTROOS_Project_2_TemporaryKey.pfx" />
     <None Include="INTROOS_Project_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
