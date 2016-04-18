@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INTROOS_Project", "INTROOS_Project\INTROOS_Project.csproj", "{159AB303-DA9D-4738-87D8-3D96BFED65AE}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupINTROOS", "Setup1\Setup1.vdproj", "{98F90BD9-1482-43B3-8470-AA5878043CF5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{159AB303-DA9D-4738-87D8-3D96BFED65AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{159AB303-DA9D-4738-87D8-3D96BFED65AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{159AB303-DA9D-4738-87D8-3D96BFED65AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98F90BD9-1482-43B3-8470-AA5878043CF5}.Debug|Any CPU.ActiveCfg = Debug
+		{98F90BD9-1482-43B3-8470-AA5878043CF5}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
